@@ -232,6 +232,7 @@
                 
                 
                 <h1 id="_1">观察者模式</h1>
+<p>观察者模式中有两个重要概念，Observer 和 Subject。观察者模式的本质是 Subject 对象发生变化的时候，通知所有观察了这个 Subject 的 Observer，而 Subject 不需要 Observer 实际类型信息。</p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">IObserver</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
@@ -267,7 +268,7 @@
 
 <span class="c1">// 新创建的类需要继承的基类</span>
 <span class="k">class</span> <span class="nc">AnotherImportantBaseClass</span> <span class="p">{...};</span>
-<span class="c1">// 使用多重继承</span>
+<span class="c1">// 使用多重继承。若不继承 IObserve，而在 SubClass 添加 OnNotify 方法，则无法使用 Subject 的 Register 方法</span>
 <span class="k">class</span> <span class="nc">ObserverSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">AnotherImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">IObserve</span> <span class="p">{...};</span>
 </pre></div>
 
