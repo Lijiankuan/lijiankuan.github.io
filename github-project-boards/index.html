@@ -36,7 +36,7 @@
     
     
       
-        <title>观察者模式 - Studio</title>
+        <title>组内敏捷开发说明 - Studio</title>
       
     
     
@@ -108,7 +108,7 @@
               Studio
             </span>
             <span class="md-header-nav__topic">
-              观察者模式
+              组内敏捷开发说明
             </span>
           
         </div>
@@ -186,6 +186,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -196,22 +208,53 @@
       
     
     
-    <a href="./" title="观察者模式" class="md-nav__link md-nav__link--active">
-      观察者模式
-    </a>
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        组内敏捷开发说明
+      </label>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../github-project-boards/" title="组内敏捷开发说明" class="md-nav__link">
+    <a href="./" title="组内敏捷开发说明" class="md-nav__link md-nav__link--active">
       组内敏捷开发说明
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="工作流程" class="md-nav__link">
+    工作流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-project-boards" title="Github Project Boards" class="md-nav__link">
+    Github Project Boards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-code-review" title="Pull Request 和 Code Review" class="md-nav__link">
+    Pull Request 和 Code Review
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -232,6 +275,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="工作流程" class="md-nav__link">
+    工作流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#github-project-boards" title="Github Project Boards" class="md-nav__link">
+    Github Project Boards
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-code-review" title="Pull Request 和 Code Review" class="md-nav__link">
+    Pull Request 和 Code Review
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -243,59 +316,87 @@
               
                 
                 
-                <h1 id="_1">观察者模式</h1>
-<p>观察者模式中有两个重要概念，Observer 和 Subject。观察者模式的本质是 Subject 对象发生变化的时候，通知所有观察了这个 Subject 的 Observer，而 Subject 不需要 Observer 实际类型信息。</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">IObserver</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">OnNotify</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">ISubject</span>
-<span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&gt;</span> <span class="n">observers_</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="c1">// 利用这个方法可以将Observer对象注册到Subject对象中</span>
-    <span class="kt">void</span> <span class="n">RegisterObserver</span><span class="p">(</span><span class="n">IObserver</span> <span class="n">observer</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">observers_</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
-    <span class="p">}</span>
-
-<span class="k">protected</span><span class="o">:</span>
-    <span class="c1">// 当类对象状态发生改变时候，NotifyObserver 方法通知所有注册进（调用 RegisterObserver）这个类对象的观察者</span>
-    <span class="kt">void</span> <span class="n">NotifyObserver</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">foreach</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">observer</span><span class="p">:</span> <span class="n">observers_</span><span class="p">)</span>
-            <span class="n">observer</span><span class="p">.</span><span class="n">OnNotify</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-
-<span class="c1">// 新创建的类需要继承的基类</span>
-<span class="k">class</span> <span class="nc">ImportantBaseClass</span> <span class="p">{</span> <span class="cm">/* Members */</span> <span class="p">};</span>
-<span class="c1">// Donot-repeat-yourself 原则，Subject 作为基类，用到多重继承</span>
-<span class="k">class</span> <span class="nc">SubjectSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">ImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">ISubject</span> <span class="p">{</span> <span class="cm">/* Members */</span> <span class="p">};</span>
-
-<span class="c1">// 新创建的类需要继承的基类</span>
-<span class="k">class</span> <span class="nc">AnotherImportantBaseClass</span> <span class="p">{...};</span>
-<span class="c1">// 使用多重继承。若不继承 IObserve，而在 SubClass 添加 OnNotify 方法，则无法使用 Subject 的 Register 方法</span>
-<span class="k">class</span> <span class="nc">ObserverSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">AnotherImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">IObserve</span> <span class="p">{...};</span>
-</pre></div>
-
-
-<div class="footnote">
-<hr />
+                <h1 id="_1">组内敏捷开发说明</h1>
+<h2 id="_2">工作流程</h2>
 <ol>
-<li id="fn:1">
-<p><a href="https://softwareengineering.stackexchange.com/questions/221560/observer-class-as-instance">observer class as instance - Software Engineering Stack Exchange</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<li>
+<p>任务划分</p>
+<ul>
+<li>Sprint 周期目标</li>
+<li>Sprint 周期任务清单</li>
+<li>难度投点</li>
+<li>任务分配</li>
+</ul>
 </li>
-<li id="fn:2">
-<p><a href="https://stackoverflow.com/questions/9359948/multiple-inheritance-whats-a-good-example">Multiple Inheritance: What's a good example? - Stack Overflow</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<li>
+<p>进行任务</p>
+<ul>
+<li>Github 创建新分支</li>
+<li>编码<ul>
+<li>TDD 测试驱动</li>
+<li>代码风格规范</li>
+</ul>
+</li>
+<li>Commit &amp; Push</li>
+<li>Pull Request</li>
+</ul>
+</li>
+<li>
+<p>Code Review</p>
+<ul>
+<li>每周依据任务数量进行多次 Code Review</li>
+</ul>
+</li>
+<li>
+<p>完成任务</p>
+<ul>
+<li>文档更新到 Project/docs 目录下</li>
+</ul>
 </li>
 </ol>
-</div>
+<table>
+<thead>
+<tr>
+<th>流程</th>
+<th>时间说明</th>
+<th>时长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>例会</td>
+<td>工作日 每日</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td>任务划分</td>
+<td>周一</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>Code Review</td>
+<td>周三、周五</td>
+<td>-</td>
+</tr>
+<tr>
+<td>文档更新</td>
+<td>周五</td>
+<td>-</td>
+</tr>
+<tr>
+<td>找老张</td>
+<td>周一/周二</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="github-project-boards">Github Project Boards</h2>
+<ul>
+<li>Kanban 查看/管理任务进度</li>
+<li>Kanban 卡片管理 Pull Request 进度</li>
+<li>Kanban 卡片管理 Issue 进度</li>
+</ul>
+<h2 id="pull-request-code-review">Pull Request 和 Code Review</h2>
                 
                   
                 
@@ -316,7 +417,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Welcome to MkDocs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../design-pattern/" title="观察者模式" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -325,25 +426,11 @@
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                Welcome to MkDocs
+                观察者模式
               </span>
             </div>
           </a>
         
-        
-          <a href="../github-project-boards/" title="组内敏捷开发说明" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  前进
-                </span>
-                组内敏捷开发说明
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
         
       </nav>
     </div>
