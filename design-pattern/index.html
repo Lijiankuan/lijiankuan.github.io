@@ -293,8 +293,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../directx/directml/" title="DirectML" class="md-nav__link">
-      DirectML
+    <a href="../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
     </a>
   </li>
 
@@ -361,16 +385,10 @@
     <span class="p">}</span>
 <span class="p">};</span>
 
-
 <span class="c1">// 新创建的类需要继承的基类</span>
-<span class="k">class</span> <span class="nc">ImportantBaseClass</span> <span class="p">{</span> <span class="cm">/* Members */</span> <span class="p">};</span>
-<span class="c1">// Donot-repeat-yourself 原则，Subject 作为基类，用到多重继承</span>
-<span class="k">class</span> <span class="nc">SubjectSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">ImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">ISubject</span> <span class="p">{</span> <span class="cm">/* Members */</span> <span class="p">};</span>
-
-<span class="c1">// 新创建的类需要继承的基类</span>
-<span class="k">class</span> <span class="nc">AnotherImportantBaseClass</span> <span class="p">{...};</span>
+<span class="k">class</span> <span class="nc">ImportantBaseClass</span> <span class="p">{...};</span>
 <span class="c1">// 使用多重继承。若不继承 IObserve，而在 SubClass 添加 OnNotify 方法，则无法使用 Subject 的 Register 方法</span>
-<span class="k">class</span> <span class="nc">ObserverSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">AnotherImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">IObserve</span> <span class="p">{...};</span>
+<span class="k">class</span> <span class="nc">ObserverSubClass</span><span class="o">:</span> <span class="k">public</span> <span class="n">ImportantBaseClass</span><span class="p">,</span> <span class="k">public</span> <span class="n">IObserve</span> <span class="p">{...};</span>
 </pre></div>
 
 
