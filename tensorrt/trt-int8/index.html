@@ -40,7 +40,7 @@
     
     
       
-        <title>DirectML 工作流 - Studio</title>
+        <title>TensorRT INT8 - Studio</title>
       
     
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#directml" tabindex="1" class="md-skip">
+      <a href="#tensorrt-int8" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -112,7 +112,7 @@
               Studio
             </span>
             <span class="md-header-nav__topic">
-              DirectML 工作流
+              TensorRT INT8
             </span>
           
         </div>
@@ -182,7 +182,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../" title="DirectX 12" class="md-tabs__link md-tabs__link--active">
+        <a href="../../directx/" title="DirectX 12" class="md-tabs__link">
           DirectX 12
         </a>
       
@@ -195,7 +195,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../tensorrt/" title="TensorRT" class="md-tabs__link">
+        <a href="../" title="TensorRT" class="md-tabs__link md-tabs__link--active">
           TensorRT
         </a>
       
@@ -266,12 +266,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       DirectX 12
@@ -289,7 +287,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="扉页" class="md-nav__link">
+    <a href="../../directx/" title="扉页" class="md-nav__link">
       扉页
     </a>
   </li>
@@ -301,8 +299,94 @@
 
 
   <li class="md-nav__item">
-    <a href="../directml/" title="DirectML 指南" class="md-nav__link">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
       DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../project/" title="测试" class="md-nav__link">
+      测试
     </a>
   </li>
 
@@ -321,177 +405,10 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        DirectML 工作流
-      </label>
-    
-    <a href="./" title="DirectML 工作流" class="md-nav__link md-nav__link--active">
-      DirectML 工作流
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">目录</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" title="初始化" class="md-nav__link">
-    初始化
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#direct3d-12" title="初始化 Direct3D 12 资源" class="md-nav__link">
-    初始化 Direct3D 12 资源
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml_1" title="初始化 DirectML 资源" class="md-nav__link">
-    初始化 DirectML 资源
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml-operator" title="初始化 DirectML Operator" class="md-nav__link">
-    初始化 DirectML Operator
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="执行" class="md-nav__link">
-    执行
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#input-output" title="绑定 Input/ Output" class="md-nav__link">
-    绑定 Input/ Output
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml-operator_1" title="执行 DirectML Operator" class="md-nav__link">
-    执行 DirectML Operator
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../binding/" title="资源绑定" class="md-nav__link">
-      资源绑定
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../project/" title="项目编码相关" class="md-nav__link">
-      项目编码相关
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      TensorRT
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        TensorRT
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
-      TensorRT 安装说明
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
-      测试
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+    <a href="./" title="TensorRT INT8" class="md-nav__link md-nav__link--active">
       TensorRT INT8
     </a>
+    
   </li>
 
         
@@ -501,7 +418,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+    <a href="../trtexec/" title="trtexec 源码分析" class="md-nav__link">
       trtexec 源码分析
     </a>
   </li>
@@ -529,76 +446,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">目录</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" title="初始化" class="md-nav__link">
-    初始化
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#direct3d-12" title="初始化 Direct3D 12 资源" class="md-nav__link">
-    初始化 Direct3D 12 资源
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml_1" title="初始化 DirectML 资源" class="md-nav__link">
-    初始化 DirectML 资源
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml-operator" title="初始化 DirectML Operator" class="md-nav__link">
-    初始化 DirectML Operator
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="执行" class="md-nav__link">
-    执行
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#input-output" title="绑定 Input/ Output" class="md-nav__link">
-    绑定 Input/ Output
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directml-operator_1" title="执行 DirectML Operator" class="md-nav__link">
-    执行 DirectML Operator
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -610,34 +457,15 @@
               
                 
                 
-                <h1 id="directml">DirectML 工作流</h1>
-<h2 id="_1">初始化</h2>
-<h3 id="direct3d-12">初始化 Direct3D 12 资源</h3>
+                <h1 id="tensorrt-int8">TensorRT INT8</h1>
+<p>TensorRT 支持转换 int8 模型、int8 推断功能。TensorRT 损视少量精度的情况下将 fp32 模型转换为 int8，大幅度减少推断时间，减少存储消耗，提升吞吐量。</p>
+<p>下图为转换后的精度对比
+<img alt="" src="../../assets/images/trt-int8-precision.png" /></p>
+<p>TensorRT INT8 推断具体步骤</p>
 <ul>
-<li>Direct3D 12 device</li>
-<li>command queue</li>
-<li>command list</li>
-<li>descriptor heaps.</li>
-</ul>
-<h3 id="directml_1">初始化 DirectML 资源</h3>
-<ul>
-<li>DirectML device</li>
-<li>Operator instances</li>
-</ul>
-<h3 id="directml-operator">初始化 DirectML Operator</h3>
-<ul>
-<li>Operator Initialization</li>
-<li>载入权重资源，绑定到 initializer 的 outputs，绑定到 compiled 的 persistent 资源</li>
-<li>Close and execute your command list.</li>
-</ul>
-<h2 id="_2">执行</h2>
-<h3 id="input-output">绑定 Input/ Output</h3>
-<ul>
-<li>Next, you need to bind those Direct3D 12 resources as your input and output tensors. Record into your command list the binding and the execution of your operators.</li>
-</ul>
-<h3 id="directml-operator_1">执行 DirectML Operator</h3>
-<ul>
-<li>Close and execute your command list.</li>
+<li>程序提供有代表性的数据集</li>
+<li>TensorRT 利用数据集生成校准表</li>
+<li>保存校准表</li>
 </ul>
                 
                   
@@ -659,7 +487,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../directml/" title="DirectML 指南" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../project/" title="测试" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -668,19 +496,19 @@
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                DirectML 指南
+                测试
               </span>
             </div>
           </a>
         
         
-          <a href="../binding/" title="资源绑定" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../trtexec/" title="trtexec 源码分析" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                资源绑定
+                trtexec 源码分析
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

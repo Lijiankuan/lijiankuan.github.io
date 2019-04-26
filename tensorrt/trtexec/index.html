@@ -1,0 +1,875 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="工作、编程记录">
+      
+      
+      
+        <meta name="author" content="李健宽">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/code.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+    
+    
+      
+        <title>trtexec 源码分析 - Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Noto Serif SC","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#trtexec" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Studio" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/images/logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Studio
+            </span>
+            <span class="md-header-nav__topic">
+              trtexec 源码分析
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../directx/" title="DirectX 12" class="md-tabs__link">
+          DirectX 12
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" title="TensorRT" class="md-tabs__link md-tabs__link--active">
+          TensorRT
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Studio" class="md-nav__button md-logo">
+      
+        <img src="../../assets/images/logo.svg" width="48" height="48">
+      
+    </a>
+    Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../github-project-boards/" title="组内敏捷开发说明" class="md-nav__link">
+      组内敏捷开发说明
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      DirectX 12
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        DirectX 12
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/" title="扉页" class="md-nav__link">
+      扉页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        trtexec 源码分析
+      </label>
+    
+    <a href="./" title="trtexec 源码分析" class="md-nav__link md-nav__link--active">
+      trtexec 源码分析
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#main" title="main 方法" class="md-nav__link">
+    main 方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#createengine" title="createEngine" class="md-nav__link">
+    createEngine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#doinference" title="doInference" class="md-nav__link">
+    doInference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#main" title="main 方法" class="md-nav__link">
+    main 方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#createengine" title="createEngine" class="md-nav__link">
+    createEngine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#doinference" title="doInference" class="md-nav__link">
+    doInference
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="trtexec">trtexec 源码分析</h1>
+<p>源码来自英伟达官方样例，用于 benchmark 测试。给定 caffe/onnx/uff 格式模型，在随机数据上测试 Inference 效率，此外可以作为生成序列化 engine 的样例。</p>
+<p>使用说明如下：</p>
+<div class="codehilite"><pre><span></span>Mandatory params:
+  --deploy=&lt;file&gt;          Caffe deploy file
+  OR --uff=&lt;file&gt;          UFF file
+  OR --onnx=&lt;file&gt;         ONNX Model file
+  OR --loadEngine=&lt;file&gt;   Load a saved engine
+
+Mandatory params for UFF:
+  --uffInput=&lt;name&gt;,C,H,W Input blob name and its dimensions for UFF parser (can be specified multiple times)
+  --output=&lt;name&gt;      Output blob name (can be specified multiple times)
+
+Mandatory params for Caffe:
+  --output=&lt;name&gt;      Output blob name (can be specified multiple times)
+
+Optional params:
+  --model=&lt;file&gt;          Caffe model file (default = no model, random weights used)
+  --batch=N               Set batch size (default = 1)
+  --device=N              Set cuda device to N (default = 0)
+  --iterations=N          Run N iterations (default = 10)
+  --avgRuns=N             Set avgRuns to N - perf is measured as an average of avgRuns (default=10)
+  --percentile=P          For each iteration, report the percentile time at P percentage (0&lt;=P&lt;=100, with 0 representing min, and 100 representing max; default = 99.0%)
+  --workspace=N           Set workspace size in megabytes (default = 16)
+  --fp16                  Run in fp16 mode (default = false). Permits 16-bit kernels
+  --int8                  Run in int8 mode (default = false). Currently no support for ONNX model.
+  --verbose               Use verbose logging (default = false)
+  --saveEngine=&lt;file&gt;     Save a serialized engine to file.
+  --loadEngine=&lt;file&gt;     Load a serialized engine from file.
+  --calib=&lt;file&gt;          Read INT8 calibration cache file.  Currently no support for ONNX model.
+  --useDLACore=N          Specify a DLA engine for layers that support DLA. Value can range from 0 to n-1, where n is the number of DLA engines on the platform.
+  --allowGPUFallback      If --useDLACore flag is present and if a layer can&#39;t run on DLA, then run on GPU. 
+  --useSpinWait           Actively wait for work completion. This option may decrease multi-process synchronization time at the cost of additional CPU usage. (default = false)
+  --dumpOutput            Dump outputs at end of test. 
+  -h, --help              Print usage
+</pre></div>
+
+
+<p>例子：</p>
+<div class="codehilite"><pre><span></span>$ trtexec --deploy<span class="o">=</span>/path/to/mnist.prototxt --model<span class="o">=</span>/path/to/mnist.caffemodel --output<span class="o">=</span>prob
+</pre></div>
+
+
+<h2 id="main">main 方法</h2>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// create a TensorRT model from the caffe/uff/onnx model and serialize it to a stream</span>
+
+    <span class="k">auto</span> <span class="n">sampleTest</span> <span class="o">=</span> <span class="n">gLogger</span><span class="p">.</span><span class="n">defineTest</span><span class="p">(</span><span class="n">gSampleName</span><span class="p">,</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">**&gt;</span><span class="p">(</span><span class="n">argv</span><span class="p">));</span>
+
+    <span class="n">gLogger</span><span class="p">.</span><span class="n">reportTestStart</span><span class="p">(</span><span class="n">sampleTest</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">parseArgs</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">gLogger</span><span class="p">.</span><span class="n">reportFail</span><span class="p">(</span><span class="n">sampleTest</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">help</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printUsage</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">gLogger</span><span class="p">.</span><span class="n">reportPass</span><span class="p">(</span><span class="n">sampleTest</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setReportableSeverity</span><span class="p">(</span><span class="n">Severity</span><span class="o">::</span><span class="n">kVERBOSE</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">device</span><span class="p">);</span>
+
+    <span class="n">initLibNvInferPlugins</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gLogger</span><span class="p">.</span><span class="n">getTRTLogger</span><span class="p">(),</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+
+    <span class="n">ICudaEngine</span><span class="o">*</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">createEngine</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">engine</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">gLogError</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Engine could not be created&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">gLogger</span><span class="p">.</span><span class="n">reportFail</span><span class="p">(</span><span class="n">sampleTest</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">uffFile</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">onnxModelFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">nvcaffeparser1</span><span class="o">::</span><span class="n">shutdownProtobufLibrary</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">deployFile</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">onnxModelFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">nvuffparser</span><span class="o">::</span><span class="n">shutdownProtobufLibrary</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">doInference</span><span class="p">(</span><span class="o">*</span><span class="n">engine</span><span class="p">);</span>
+    <span class="n">engine</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">gLogger</span><span class="p">.</span><span class="n">reportPass</span><span class="p">(</span><span class="n">sampleTest</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>主函数完成以下工作：</p>
+<ul>
+<li>解析参数</li>
+<li>createEngine</li>
+<li>doInference</li>
+</ul>
+<p>接下来具体分析 createEngine 和 doInference 两个函数</p>
+<h2 id="createengine">createEngine</h2>
+<div class="codehilite"><pre><span></span><span class="k">static</span> <span class="n">ICudaEngine</span><span class="o">*</span> <span class="nf">createEngine</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ICudaEngine</span><span class="o">*</span> <span class="n">engine</span><span class="p">;</span>
+    <span class="c1">// load directly from serialized engine file if deploy not specified</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">loadEngine</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">trtModelStream</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">size</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">file</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">loadEngine</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">good</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">seekg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">file</span><span class="p">.</span><span class="n">end</span><span class="p">);</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">tellg</span><span class="p">();</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">seekg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">file</span><span class="p">.</span><span class="n">beg</span><span class="p">);</span>
+            <span class="n">trtModelStream</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">trtModelStream</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">size</span><span class="p">);</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="n">IRuntime</span><span class="o">*</span> <span class="n">infer</span> <span class="o">=</span> <span class="n">createInferRuntime</span><span class="p">(</span><span class="n">gLogger</span><span class="p">.</span><span class="n">getTRTLogger</span><span class="p">());</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">useDLACore</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">infer</span><span class="o">-&gt;</span><span class="n">setDLACore</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">useDLACore</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">engine</span> <span class="o">=</span> <span class="n">infer</span><span class="o">-&gt;</span><span class="n">deserializeCudaEngine</span><span class="p">(</span><span class="n">trtModelStream</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">size</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+        <span class="n">gLogInfo</span> <span class="o">&lt;&lt;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">loadEngine</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; has been successfully loaded.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">infer</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">engine</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">deployFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">uffFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">onnxModelFile</span><span class="p">.</span><span class="n">empty</span><span class="p">()))</span>
+    <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">uffFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">engine</span> <span class="o">=</span> <span class="n">uffToTRTModel</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">onnxModelFile</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">engine</span> <span class="o">=</span> <span class="n">onnxToTRTModel</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">engine</span> <span class="o">=</span> <span class="n">caffeToTRTModel</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">engine</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">gLogError</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Engine could not be created&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gParams</span><span class="p">.</span><span class="n">saveEngine</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">p</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">saveEngine</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">gLogError</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;could not open plan output file&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">IHostMemory</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">engine</span><span class="o">-&gt;</span><span class="n">serialize</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">gLogError</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;could not serialize engine.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">p</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ptr</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()),</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+            <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">();</span>
+            <span class="n">gLogInfo</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Engine has been successfully saved to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">saveEngine</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">engine</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// complain about empty deploy file</span>
+    <span class="n">gLogError</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Deploy file not specified&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>将 caffe/onnx/uff 模型转换为 TensorRT engine</li>
+<li>序列化 engine</li>
+</ul>
+<h2 id="doinference">doInference</h2>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">doInference</span><span class="p">(</span><span class="n">ICudaEngine</span><span class="o">&amp;</span> <span class="n">engine</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">IExecutionContext</span><span class="o">*</span> <span class="n">context</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">createExecutionContext</span><span class="p">();</span>
+
+    <span class="c1">// Use an aliasing shared_ptr since we don&#39;t want engine to be deleted when bufferManager goes out of scope.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ICudaEngine</span><span class="o">&gt;</span> <span class="n">emptyPtr</span><span class="p">{};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ICudaEngine</span><span class="o">&gt;</span> <span class="n">aliasPtr</span><span class="p">(</span><span class="n">emptyPtr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">engine</span><span class="p">);</span>
+    <span class="n">samplesCommon</span><span class="o">::</span><span class="n">BufferManager</span> <span class="n">bufferManager</span><span class="p">(</span><span class="n">aliasPtr</span><span class="p">,</span> <span class="n">gParams</span><span class="p">.</span><span class="n">batchSize</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span> <span class="n">buffers</span> <span class="o">=</span> <span class="n">bufferManager</span><span class="p">.</span><span class="n">getDeviceBindings</span><span class="p">();</span>
+
+    <span class="n">cudaStream_t</span> <span class="n">stream</span><span class="p">;</span>
+    <span class="n">CHECK</span><span class="p">(</span><span class="n">cudaStreamCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">));</span>
+    <span class="n">cudaEvent_t</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">cudaEventFlags</span> <span class="o">=</span> <span class="n">gParams</span><span class="p">.</span><span class="n">useSpinWait</span> <span class="o">?</span> <span class="nl">cudaEventDefault</span> <span class="p">:</span> <span class="n">cudaEventBlockingSync</span><span class="p">;</span>
+    <span class="n">CHECK</span><span class="p">(</span><span class="n">cudaEventCreateWithFlags</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">,</span> <span class="n">cudaEventFlags</span><span class="p">));</span>
+    <span class="n">CHECK</span><span class="p">(</span><span class="n">cudaEventCreateWithFlags</span><span class="p">(</span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="n">cudaEventFlags</span><span class="p">));</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">times</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">avgRuns</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">iterations</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">float</span> <span class="n">totalGpu</span><span class="p">{</span><span class="mi">0</span><span class="p">},</span> <span class="n">totalHost</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// GPU and Host timers</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">avgRuns</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">tStart</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+            <span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stream</span><span class="p">);</span>
+            <span class="n">context</span><span class="o">-&gt;</span><span class="n">enqueue</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">batchSize</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stream</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+            <span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">stream</span><span class="p">);</span>
+            <span class="n">cudaEventSynchronize</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>
+
+            <span class="k">auto</span> <span class="n">tEnd</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+            <span class="n">totalHost</span> <span class="o">+=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">milli</span><span class="o">&gt;</span><span class="p">(</span><span class="n">tEnd</span> <span class="o">-</span> <span class="n">tStart</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+            <span class="kt">float</span> <span class="n">ms</span><span class="p">;</span>
+            <span class="n">cudaEventElapsedTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ms</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+            <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms</span><span class="p">;</span>
+            <span class="n">totalGpu</span> <span class="o">+=</span> <span class="n">ms</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">totalGpu</span> <span class="o">/=</span> <span class="n">gParams</span><span class="p">.</span><span class="n">avgRuns</span><span class="p">;</span>
+        <span class="n">totalHost</span> <span class="o">/=</span> <span class="n">gParams</span><span class="p">.</span><span class="n">avgRuns</span><span class="p">;</span>
+        <span class="n">gLogInfo</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Average over &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">gParams</span><span class="p">.</span><span class="n">avgRuns</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; runs is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">totalGpu</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; ms (host walltime is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">totalHost</span>
+                 <span class="o">&lt;&lt;</span> <span class="s">&quot; ms, &quot;</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">pct</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;\% percentile time is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">percentile</span><span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">pct</span><span class="p">,</span> <span class="n">times</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;).&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">gParams</span><span class="p">.</span><span class="n">dumpOutput</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">bufferManager</span><span class="p">.</span><span class="n">copyOutputToHost</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">nbBindings</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">getNbBindings</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nbBindings</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">engine</span><span class="p">.</span><span class="n">bindingIsInput</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">tensorName</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">getBindingName</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                <span class="n">gLogInfo</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Dumping output tensor &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">tensorName</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">bufferManager</span><span class="p">.</span><span class="n">dumpBuffer</span><span class="p">(</span><span class="n">gLogInfo</span><span class="p">,</span> <span class="n">tensorName</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">cudaStreamDestroy</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+    <span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+    <span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>
+    <span class="n">context</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>迭代多次，分别计算在 GPU 上运算的时间，以及从开始到完成进行的 walltime，包括其他进程使用的时间和本进程耗费在阻塞（如等待I/O操作完成）上的时间。</li>
+<li>销毁资源</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../trt-int8/" title="TensorRT INT8" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                TensorRT INT8
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 lijiankuan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

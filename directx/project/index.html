@@ -40,7 +40,7 @@
     
     
       
-        <title>小组项目 - Studio</title>
+        <title>项目编码相关 - Studio</title>
       
     
     
@@ -112,7 +112,7 @@
               Studio
             </span>
             <span class="md-header-nav__topic">
-              小组项目
+              项目编码相关
             </span>
           
         </div>
@@ -157,14 +157,16 @@
       
         
 
-<nav class="md-tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href="../.." title="Home" class="md-tabs__link md-tabs__link--active">
+      <a href="../.." title="Home" class="md-tabs__link">
         Home
       </a>
     
@@ -180,8 +182,21 @@
   
     <li class="md-tabs__item">
       
-        <a href="../" title="DirectX 12" class="md-tabs__link">
+        <a href="../" title="DirectX 12" class="md-tabs__link md-tabs__link--active">
           DirectX 12
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tensorrt/" title="TensorRT" class="md-tabs__link">
+          TensorRT
         </a>
       
     </li>
@@ -251,10 +266,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       DirectX 12
@@ -314,6 +331,183 @@
   </li>
 
         
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        项目编码相关
+      </label>
+    
+    <a href="./" title="项目编码相关" class="md-nav__link md-nav__link--active">
+      项目编码相关
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#persistent-temporary" title="Persistent Temporary 资源说明" class="md-nav__link">
+    Persistent Temporary 资源说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operator" title="卷积 Operator" class="md-nav__link">
+    卷积 Operator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conv-operator" title="Conv Operator 工作流" class="md-nav__link">
+    Conv Operator 工作流
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="初始化" class="md-nav__link">
+    初始化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" title="创建 Operator" class="md-nav__link">
+    创建 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" title="初始化 Operator" class="md-nav__link">
+    初始化 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" title="执行 Operator" class="md-nav__link">
+    执行 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="结束" class="md-nav__link">
+    结束
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+      trtexec 源码分析
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -336,6 +530,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#persistent-temporary" title="Persistent Temporary 资源说明" class="md-nav__link">
+    Persistent Temporary 资源说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operator" title="卷积 Operator" class="md-nav__link">
+    卷积 Operator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conv-operator" title="Conv Operator 工作流" class="md-nav__link">
+    Conv Operator 工作流
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="初始化" class="md-nav__link">
+    初始化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_1" title="创建 Operator" class="md-nav__link">
+    创建 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_2" title="初始化 Operator" class="md-nav__link">
+    初始化 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator_3" title="执行 Operator" class="md-nav__link">
+    执行 Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="结束" class="md-nav__link">
+    结束
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -347,8 +612,8 @@
               
                 
                 
-                <h1 id="_1">小组项目</h1>
-<p>尝试该 Join Operator<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 进行类似 torch.cat 的操作</p>
+                <h1 id="_1">项目编码相关</h1>
+<p>尝试用 Join Operator<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 进行类似 torch.cat 的操作</p>
 <div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="n">DML_JOIN_OPERATOR_DESC</span>
 <span class="p">{</span>
     <span class="n">UINT</span> <span class="n">InputCount</span><span class="p">;</span>
@@ -359,11 +624,153 @@
 </pre></div>
 
 
+<h2 id="persistent-temporary">Persistent Temporary 资源说明</h2>
+<p>Persistent 资源与 compiled operator 生命周期一致。如果 operator 请求 persistent 资源，那么程序必须在 initializer operator 上提供，并且在之后的执行过程中这块资源不能被修改。<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p>对于 initializer operator，output 上的绑定代表了 operator 的 persistent 资源。<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<p>DML_TENSOR_FLAG_OWNED_BY_DML 标识用于权重。</p>
+<blockquote>
+<p>If the dispatchable reports a non-zero size for its more long-lived persistent resource, though, then the procedure is a little different. You should create a buffer and describe a binding following the same pattern as shown above. But add it to your operator initializer's binding table with a call to IDMLBindingTable::BindOutputs, because it's the operator initializer's job to initialize the persistent resource. Then add it to your compiled operator's binding table with a call to IDMLBindingTable::BindPersistentResource.<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></p>
+<p>For operator initializers, input bindings are expected to be of type DML_BINDING_TYPE_BUFFER_ARRAY with one input binding per operator to initialize, supplied in the order that you specified the operators during creation or reset of the initializer. Each buffer array should have a size equal to the number of inputs of its corresponding operator to initialize. Input tensors that had the DML_TENSOR_FLAG_OWNED_BY_DML flag set should be bound during initialize—otherwise, nothing should be bound for that tensor. If there is nothing to be bound as input for initialization of an operator (that is, there are no tensors with the DML_TENSOR_FLAG_OWNED_BY_DML flag set) then you may supply nullptr or an empty DML_BUFFER_ARRAY_BINDING to indicate 'no binding'.<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></p>
+</blockquote>
+<p>Persistent 资源使用方法：</p>
+<ol>
+<li>创建 persistent 资源</li>
+<li>初始化时将 persistent 资源绑定到 initializer operator 的 outputs（执行初始化前需要将 weight tensors 绑定到 inputs）</li>
+<li>执行时绑定到 compiled operator 的 persistent </li>
+</ol>
+<h2 id="operator">卷积 Operator</h2>
+<div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="n">DML_CONVOLUTION_OPERATOR_DESC</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">DML_TENSOR_DESC</span>     <span class="o">*</span><span class="n">InputTensor</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">DML_TENSOR_DESC</span>     <span class="o">*</span><span class="n">FilterTensor</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">DML_TENSOR_DESC</span>     <span class="o">*</span><span class="n">BiasTensor</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">DML_TENSOR_DESC</span>     <span class="o">*</span><span class="n">OutputTensor</span><span class="p">;</span>
+  <span class="n">DML_CONVOLUTION_MODE</span>      <span class="n">Mode</span><span class="p">;</span>
+  <span class="n">DML_CONVOLUTION_DIRECTION</span> <span class="n">Direction</span><span class="p">;</span>
+  <span class="n">UINT</span>                      <span class="n">DimensionCount</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">UINT</span>                <span class="o">*</span><span class="n">Strides</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">UINT</span>                <span class="o">*</span><span class="n">Dilations</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">UINT</span>                <span class="o">*</span><span class="n">StartPadding</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">UINT</span>                <span class="o">*</span><span class="n">EndPadding</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">UINT</span>                <span class="o">*</span><span class="n">OutputPadding</span><span class="p">;</span>
+  <span class="n">UINT</span>                      <span class="n">GroupCount</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">DML_OPERATOR_DESC</span>   <span class="o">*</span><span class="n">FusedActivation</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InputTensor</td>
+<td>-</td>
+</tr>
+<tr>
+<td>FilterTensor</td>
+<td>-</td>
+</tr>
+<tr>
+<td>BiasTensor</td>
+<td>可选参数</td>
+</tr>
+<tr>
+<td>OutputTensor</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Mode</td>
+<td>使用 DML_CONVOLUTION_MODE_CROSS_CORRELATION，机器学习中的卷积即互相关</td>
+</tr>
+<tr>
+<td>Direction</td>
+<td>forward pass/backward pass</td>
+</tr>
+<tr>
+<td>DimensionCount</td>
+<td>The number of dimensions. This field determines the size of the Strides, Dilations, StartPadding, EndPadding, and OutputPadding arrays.</td>
+</tr>
+<tr>
+<td>Strides</td>
+<td>步长</td>
+</tr>
+<tr>
+<td>Dilations</td>
+<td>每一个轴的膨胀率，设置为1表示不膨胀</td>
+</tr>
+<tr>
+<td>StartPadding</td>
+<td>起始位置需要添加的 pixels 数量</td>
+</tr>
+<tr>
+<td>EndPadding</td>
+<td>结束位置需添加的 pixels 数量</td>
+</tr>
+<tr>
+<td>OutputPadding</td>
+<td>反卷积中用到的参数</td>
+</tr>
+<tr>
+<td>Group</td>
+<td><img alt="" src="../../assets/images/group-convolution.png" /></td>
+</tr>
+<tr>
+<td>FusedActivation</td>
+<td>可选参数，激活层</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conv-operator">Conv Operator 工作流</h2>
+<h3 id="_2">初始化</h3>
+<ol>
+<li>创建 D3D12 device、queue、list、heaps，DML device</li>
+</ol>
+<h3 id="operator_1">创建 Operator</h3>
+<ol>
+<li>创建 InputTensor，FilterTensor，BiasTensor（可选），OutputTensor Tensor 描述符</li>
+<li>用 1. 中描述符，创建 DML_CONVOLUTION_OPERATOR_DESC</li>
+<li>创建 Operator</li>
+</ol>
+<h3 id="operator_2">初始化 Operator</h3>
+<ol>
+<li>创建 Temporary、Persistent 资源</li>
+<li>绑定 Temporary 资源（Persistent 仅需要执行 Operator 时绑定）</li>
+<li>为 binding table 绑定 Outputs（此处为 Persistent 资源</li>
+<li>为 binding table 绑定 Inputs</li>
+<li>初始化 Operator</li>
+</ol>
+<h3 id="operator_3">执行 Operator</h3>
+<ol>
+<li>绑定 Temporary、Persistent 资源</li>
+<li>为 binding table 绑定 Inputs</li>
+<li>为 binding table 绑定 InputsOutputs</li>
+<li>执行 Operator</li>
+</ol>
+<h3 id="_3">结束</h3>
+<ol>
+<li>回读结果</li>
+</ol>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
 <p><a href="https://docs.microsoft.com/en-us/windows/desktop/api/directml/">DirectML API 文档</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>https://docs.microsoft.com/en-us/windows/desktop/api/directml/nf-directml-idmlbindingtable-bindpersistentresource&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>https://docs.microsoft.com/en-us/windows/desktop/api/directml/nf-directml-idmlbindingtable-bindoutputs&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>https://docs.microsoft.com/en-us/windows/desktop/direct3d12/dml-binding#describe-and-bind-any-temporarypersistent-resources&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>https://docs.microsoft.com/en-us/windows/desktop/api/directml/nf-directml-idmlbindingtable-bindinputs&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -383,6 +790,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../binding/" title="资源绑定" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                资源绑定
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                TensorRT 安装说明
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
