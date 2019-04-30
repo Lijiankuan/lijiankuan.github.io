@@ -1,0 +1,1301 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="工作、编程记录">
+      
+      
+      
+        <meta name="author" content="李健宽">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/code.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+    
+    
+      
+        <title>《Effective C++》 - Studio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Noto Serif SC","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#effective-c" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Studio" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/images/logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Studio
+            </span>
+            <span class="md-header-nav__topic">
+              《Effective C++》
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../directx/" title="Hybrid Rendering" class="md-tabs__link">
+          Hybrid Rendering
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../factory/" title="C/C++" class="md-tabs__link md-tabs__link--active">
+          C/C++
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Studio" class="md-nav__button md-logo">
+      
+        <img src="../../assets/images/logo.svg" width="48" height="48">
+      
+    </a>
+    Studio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../inside-the-cpp-object-model/" title="深入探索 C++ 对象模型" class="md-nav__link">
+      深入探索 C++ 对象模型
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../github-project-boards/" title="组内敏捷开发说明" class="md-nav__link">
+      组内敏捷开发说明
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Hybrid Rendering
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Hybrid Rendering
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      DirectX 12
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        DirectX 12
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/" title="扉页" class="md-nav__link">
+      扉页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project-workflow/" title="项目代码流程" class="md-nav__link">
+      项目代码流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+      trtexec 源码分析
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      C/C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        C/C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../factory/" title="工厂模式" class="md-nav__link">
+      工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../move-semantics/" title="移动语义" class="md-nav__link">
+      移动语义
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../forward/" title="完美转发" class="md-nav__link">
+      完美转发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../enum-class/" title="枚举类" class="md-nav__link">
+      枚举类
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        《Effective C++》
+      </label>
+    
+    <a href="./" title="《Effective C++》" class="md-nav__link md-nav__link--active">
+      《Effective C++》
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01-c" title="条款 01 视C++为一个语言联邦" class="md-nav__link">
+    条款 01 视C++为一个语言联邦
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02-constenuminlinedefine" title="条款 02 尽量以const，enum，inline替换#define" class="md-nav__link">
+    条款 02 尽量以const，enum，inline替换#define
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03-const" title="条款 03 尽可能使用const" class="md-nav__link">
+    条款 03 尽可能使用const
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04" title="条款 04 确定对象被使用前已先被初始化" class="md-nav__link">
+    条款 04 确定对象被使用前已先被初始化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-c" title="条款 05 了解C++默默编写并调用哪些函数" class="md-nav__link">
+    条款 05 了解C++默默编写并调用哪些函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06" title="条款 06 若不想使用编译器自动生成的函数，就该明确拒绝" class="md-nav__link">
+    条款 06 若不想使用编译器自动生成的函数，就该明确拒绝
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#07-virtual" title="条款 07 为多态基类声明virtual析构函数" class="md-nav__link">
+    条款 07 为多态基类声明virtual析构函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08" title="条款 08 别让异常逃离析构函数" class="md-nav__link">
+    条款 08 别让异常逃离析构函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09virtual" title="条款 09绝不再构造和析构过程中调用virtual函数" class="md-nav__link">
+    条款 09绝不再构造和析构过程中调用virtual函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-operaterreference-to-this" title="条款 10 令operater=返回一个reference to *this" class="md-nav__link">
+    条款 10 令operater=返回一个reference to *this
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-operator" title="条款 11 在operator=中处理自我赋值" class="md-nav__link">
+    条款 11 在operator=中处理自我赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="条款 12  复制对象勿忘其每一个成分" class="md-nav__link">
+    条款 12  复制对象勿忘其每一个成分
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="条款 13 以对象管理资源" class="md-nav__link">
+    条款 13 以对象管理资源
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-copying" title="条款 14 资源管理类中小心使用copying行为" class="md-nav__link">
+    条款 14 资源管理类中小心使用copying行为
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="条款 15 在资源管理类中提供对原始资源的访问" class="md-nav__link">
+    条款 15 在资源管理类中提供对原始资源的访问
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-newdelete" title="条款 16 成对使用new和delete时要采用相同形式" class="md-nav__link">
+    条款 16 成对使用new和delete时要采用相同形式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-newed" title="条款 17 独立于据将newed对象置入智能指针" class="md-nav__link">
+    条款 17 独立于据将newed对象置入智能指针
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" title="条款 18" class="md-nav__link">
+    条款 18
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" title="条款 19" class="md-nav__link">
+    条款 19
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-pass-by-reference-to-constpass-by-value" title="条款 20 宁以pass-by-reference-to-const替换pass by value" class="md-nav__link">
+    条款 20 宁以pass-by-reference-to-const替换pass by value
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-reference" title="条款 21 必须返回对象时，别妄想返回其reference" class="md-nav__link">
+    条款 21 必须返回对象时，别妄想返回其reference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-private" title="条款 22 将成员变量声明为private" class="md-nav__link">
+    条款 22 将成员变量声明为private
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" title="条款 23" class="md-nav__link">
+    条款 23
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" title="条款 24" class="md-nav__link">
+    条款 24
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" title="条款 25" class="md-nav__link">
+    条款 25
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" title="条款 26" class="md-nav__link">
+    条款 26
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" title="条款 27 尽量减少转型动作" class="md-nav__link">
+    条款 27 尽量减少转型动作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" title="条款 31 将文件间的编译依存关系降至最低" class="md-nav__link">
+    条款 31 将文件间的编译依存关系降至最低
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-traits-classes" title="条款 47 请使用 traits classes 表现类型信息" class="md-nav__link">
+    条款 47 请使用 traits classes 表现类型信息
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" title="条款 53 不要忽视编译器的警告" class="md-nav__link">
+    条款 53 不要忽视编译器的警告
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-tr1" title="条款 54 让自己熟悉包括TR1在内的标准程序库" class="md-nav__link">
+    条款 54 让自己熟悉包括TR1在内的标准程序库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-boost" title="条款 55 让自己熟悉Boost" class="md-nav__link">
+    条款 55 让自己熟悉Boost
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01-c" title="条款 01 视C++为一个语言联邦" class="md-nav__link">
+    条款 01 视C++为一个语言联邦
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02-constenuminlinedefine" title="条款 02 尽量以const，enum，inline替换#define" class="md-nav__link">
+    条款 02 尽量以const，enum，inline替换#define
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03-const" title="条款 03 尽可能使用const" class="md-nav__link">
+    条款 03 尽可能使用const
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04" title="条款 04 确定对象被使用前已先被初始化" class="md-nav__link">
+    条款 04 确定对象被使用前已先被初始化
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-c" title="条款 05 了解C++默默编写并调用哪些函数" class="md-nav__link">
+    条款 05 了解C++默默编写并调用哪些函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06" title="条款 06 若不想使用编译器自动生成的函数，就该明确拒绝" class="md-nav__link">
+    条款 06 若不想使用编译器自动生成的函数，就该明确拒绝
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#07-virtual" title="条款 07 为多态基类声明virtual析构函数" class="md-nav__link">
+    条款 07 为多态基类声明virtual析构函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08" title="条款 08 别让异常逃离析构函数" class="md-nav__link">
+    条款 08 别让异常逃离析构函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09virtual" title="条款 09绝不再构造和析构过程中调用virtual函数" class="md-nav__link">
+    条款 09绝不再构造和析构过程中调用virtual函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-operaterreference-to-this" title="条款 10 令operater=返回一个reference to *this" class="md-nav__link">
+    条款 10 令operater=返回一个reference to *this
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-operator" title="条款 11 在operator=中处理自我赋值" class="md-nav__link">
+    条款 11 在operator=中处理自我赋值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="条款 12  复制对象勿忘其每一个成分" class="md-nav__link">
+    条款 12  复制对象勿忘其每一个成分
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="条款 13 以对象管理资源" class="md-nav__link">
+    条款 13 以对象管理资源
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-copying" title="条款 14 资源管理类中小心使用copying行为" class="md-nav__link">
+    条款 14 资源管理类中小心使用copying行为
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="条款 15 在资源管理类中提供对原始资源的访问" class="md-nav__link">
+    条款 15 在资源管理类中提供对原始资源的访问
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-newdelete" title="条款 16 成对使用new和delete时要采用相同形式" class="md-nav__link">
+    条款 16 成对使用new和delete时要采用相同形式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-newed" title="条款 17 独立于据将newed对象置入智能指针" class="md-nav__link">
+    条款 17 独立于据将newed对象置入智能指针
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" title="条款 18" class="md-nav__link">
+    条款 18
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" title="条款 19" class="md-nav__link">
+    条款 19
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-pass-by-reference-to-constpass-by-value" title="条款 20 宁以pass-by-reference-to-const替换pass by value" class="md-nav__link">
+    条款 20 宁以pass-by-reference-to-const替换pass by value
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-reference" title="条款 21 必须返回对象时，别妄想返回其reference" class="md-nav__link">
+    条款 21 必须返回对象时，别妄想返回其reference
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-private" title="条款 22 将成员变量声明为private" class="md-nav__link">
+    条款 22 将成员变量声明为private
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" title="条款 23" class="md-nav__link">
+    条款 23
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" title="条款 24" class="md-nav__link">
+    条款 24
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" title="条款 25" class="md-nav__link">
+    条款 25
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" title="条款 26" class="md-nav__link">
+    条款 26
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" title="条款 27 尽量减少转型动作" class="md-nav__link">
+    条款 27 尽量减少转型动作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" title="条款 31 将文件间的编译依存关系降至最低" class="md-nav__link">
+    条款 31 将文件间的编译依存关系降至最低
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-traits-classes" title="条款 47 请使用 traits classes 表现类型信息" class="md-nav__link">
+    条款 47 请使用 traits classes 表现类型信息
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53" title="条款 53 不要忽视编译器的警告" class="md-nav__link">
+    条款 53 不要忽视编译器的警告
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-tr1" title="条款 54 让自己熟悉包括TR1在内的标准程序库" class="md-nav__link">
+    条款 54 让自己熟悉包括TR1在内的标准程序库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-boost" title="条款 55 让自己熟悉Boost" class="md-nav__link">
+    条款 55 让自己熟悉Boost
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="effective-c">《Effective C++》</h1>
+<h2 id="01-c">条款 01 视C++为一个语言联邦</h2>
+<ul>
+<li>C</li>
+<li>Object-Oriented C++</li>
+<li>Template C++</li>
+<li>STL</li>
+</ul>
+<h2 id="02-constenuminlinedefine">条款 02 尽量以const，enum，inline替换#define</h2>
+<p>const替换#define
+const保证作用域
+const保证调试时追踪记号
+enum替换#define
+相比于const，enum防止取地址
+在template metaprogramming中经常使用到（## 条款 48）
+inline替换#define
+<code>#define</code>宏定义看起来像函数，但不会招致函数调用
+<code>#define</code>非类型安全？？，行为难以预料
+inline类型安全，且遵守作用域
+<code>#define</code>
+<code>#include</code>是必需品，#ifdef/#ifndef控制编译中起作用</p>
+<h2 id="03-const">条款 03 尽可能使用const</h2>
+<p>const允许语义约束，令编译器强制实施
+修饰变量
+<em>前出现const，数据为const
+</em>后出现const，指针为const
+STL迭代器
+const ::iterator，迭代器为const
+::const_iterator，不可更改迭代器指向的数据
+修饰函数参数、返回值
+降低因客户错误造成的意外
+const成员函数
+const不同，函数重载
+const成员函数
+bitwise const难以实现，例如对象含有指针，指针指向另一个对象
+mutable使得对象某些变量在const成员函数中可以修改
+const、non-const成员函数内容等价时候，non-const直接调用const成员函数，并利用static_cast进行const消除</p>
+<h2 id="04">条款 04 确定对象被使用前已先被初始化</h2>
+<p>内置类型不保证初始化
+对象初始化，构造函数利用初始化列表
+初始化列表顺序按照声明次序排列
+non-local（非函数内）static不保证跨编译单元的初始化顺序
+利用local static对象替换non-local static
+local static对象被包含在类的成员函数中
+使用时定义一个对象，调用该成员函数，成员函数返回local static的引用</p>
+<h2 id="05-c">条款 05 了解C++默默编写并调用哪些函数</h2>
+<p>构造
+析构
+拷贝构造
+拷贝操作符
+移动构造
+移动操作符</p>
+<h2 id="06">条款 06 若不想使用编译器自动生成的函数，就该明确拒绝</h2>
+<p>声明为private并且不予实现
+private利用编译器保证不被外部调用
+不予实现保证内部调用时产生链接错误
+专门阻止默认函数的基类
+提前到编译期检查
+编译器生成时候，尝试调用基类函数，调用被拒绝
+但会导致多重继承</p>
+<h2 id="07-virtual">条款 07 为多态基类声明virtual析构函数</h2>
+<p>基类指针指向派生对象，析构时，基类的析构若为non-virtual，则会发生局部销毁，导致内存泄漏
+若只有当class内含至少一个virtual函数，才为它声明virtual函数
+防止virtual带来的额外空间开销以及调用</p>
+<h2 id="08">条款 08 别让异常逃离析构函数</h2>
+<p>跳出代码块时候，多个对象被析构，抛出多个异常导致不明确的行为
+析构函数应当捕捉任何异常</p>
+<h2 id="09virtual">条款 09绝不再构造和析构过程中调用virtual函数</h2>
+<p>构造过程、析构过程虚函数从不下降至派生类</p>
+<h2 id="10-operaterreference-to-this">条款 10 令operater=返回一个reference to *this</h2>
+<p>实现连锁赋值</p>
+<h2 id="11-operator">条款 11 在operator=中处理自我赋值</h2>
+<p>if(this == &amp;obj) return *this;</p>
+<h2 id="12">条款 12  复制对象勿忘其每一个成分</h2>
+<p>拷贝构造函数中初始化列表
+拷贝操作符函数体中调用基类拷贝操作符</p>
+<h2 id="13">条款 13 以对象管理资源</h2>
+<p>RAII 将资源封装进一个资源类中
+获取到资源时，初始化资源类对象
+对象自动析构，释放资源
+常用的RAII类有 shared_ptr和auto_ptr</p>
+<h2 id="14-copying">条款 14 资源管理类中小心使用copying行为</h2>
+<p>禁止复制
+重写shared_ptr的删除器
+深拷贝
+转移底部资源所有权</p>
+<h2 id="15">条款 15 在资源管理类中提供对原始资源的访问</h2>
+<p>RAII应提供一个可以访问原始资源的API
+提供隐式转换</p>
+<h2 id="16-newdelete">条款 16 成对使用new和delete时要采用相同形式</h2>
+<p>new delete
+new[] delete[]</p>
+<h2 id="17-newed">条款 17 独立于据将newed对象置入智能指针</h2>
+<p>函数调用，实参核算过程中，不确定的核算顺序，中间出现异常时，导致资源泄露</p>
+<h2 id="18">条款 18</h2>
+<h2 id="19">条款 19</h2>
+<h2 id="20-pass-by-reference-to-constpass-by-value">条款 20 宁以pass-by-reference-to-const替换pass by value</h2>
+<p>pass-by-reference-to-const通常较高效，可以避免slicing problem
+内置类型、STL的迭代器、函数对象，pass-by-value比较适当</p>
+<h2 id="21-reference">条款 21 必须返回对象时，别妄想返回其reference</h2>
+<p>对于调用函数局部变量，返回指针后，局部变量被销毁，指针所指向内容为非法内存
+对于调用函数new出的对象，返回其指针，导致资源泄露
+必须返回对象时，返回对象即可</p>
+<h2 id="22-private">条款 22 将成员变量声明为private</h2>
+<p>将成员变量声明为private
+客户不用思考是否要加()，因为所有可调用的都是函数
+函数实现不准访问、只读访问、读写访问、惟写访问
+封装性，客户不需要知道内部变更
+为所有可能的实现提供弹性
+多线程同步、读写时通知其他对象...
+客户代码限制了其扩展
+protected与public类似，并不比public更具有封装性
+derived classes被破坏</p>
+<h2 id="23">条款 23</h2>
+<h2 id="24">条款 24</h2>
+<h2 id="25">条款 25</h2>
+<h2 id="26">条款 26</h2>
+<h2 id="27">条款 27 尽量减少转型动作</h2>
+<p>注重效率的代码中避免dynamic_cast
+尽可能基于virtual函数调用
+转型必要的话，隐藏于某个函数背后
+宁可使用C++风格的转型，更易于辨识</p>
+<h2 id="31">条款 31 将文件间的编译依存关系降至最低</h2>
+<p>如果用references或pointers可以完成任务，就不要使用objects
+尽量以class声明替换class定义</p>
+<h2 id="47-traits-classes">条款 47 请使用 traits classes 表现类型信息</h2>
+<p>Traits classes让类型相关信息在编译期可用，他们以templates和templates特化来实现
+整合重载技术后，traits classes有可能在编译器对类型执行if else测试/</p>
+<h2 id="53">条款 53 不要忽视编译器的警告</h2>
+<p>严肃对待编译器警告
+不过度依赖于编译器警告</p>
+<h2 id="54-tr1">条款 54 让自己熟悉包括TR1在内的标准程序库</h2>
+<p>STL
+iostream
+智能指针
+bind
+Type traits
+TR1为规范逐渐被新版本C++实现</p>
+<h2 id="55-boost">条款 55 让自己熟悉Boost</h2>
+<p>逐步被std::采纳</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../enum-class/" title="枚举类" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                枚举类
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 lijiankuan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
