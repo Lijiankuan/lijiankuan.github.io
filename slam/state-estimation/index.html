@@ -1,0 +1,2661 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="工作、编程记录">
+      
+      
+      
+        <meta name="author" content="李健宽">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/code.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+    
+    
+      
+        <title>《机器人学中的状态估计》 - 李健宽——手札</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Noto Serif SC","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="李健宽——手札" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/images/logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              李健宽——手札
+            </span>
+            <span class="md-header-nav__topic">
+              《机器人学中的状态估计》
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="扉页" class="md-tabs__link">
+        扉页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../graphics/" title="领域" class="md-tabs__link">
+          领域
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../reading/frvsr-cvpr2018/" title="研读" class="md-tabs__link">
+          研读
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../cplusplus/inside-the-cpp-object-model/" title="基础" class="md-tabs__link">
+          基础
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../gist/docker-basic/" title="杂记" class="md-tabs__link">
+          杂记
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="李健宽——手札" class="md-nav__button md-logo">
+      
+        <img src="../../assets/images/logo.svg" width="48" height="48">
+      
+    </a>
+    李健宽——手札
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="扉页" class="md-nav__link">
+      扉页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ems-rendering/" title="图形学 | 大型场景渲染" class="md-nav__link">
+      图形学 | 大型场景渲染
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../frss/" title="深度学习 | 深度学习图形增强" class="md-nav__link">
+      深度学习 | 深度学习图形增强
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ar/" title="AR | 联合导航" class="md-nav__link">
+      AR | 联合导航
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      领域
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        领域
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      图形学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        图形学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/" title="图形学 | 目录" class="md-nav__link">
+      图形学 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      基本算法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        基本算法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/cloud-rendering/" title="图形学 | 云渲染" class="md-nav__link">
+      图形学 | 云渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/shadow/" title="引擎中的阴影" class="md-nav__link">
+      引擎中的阴影
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-3" type="checkbox" id="nav-5-1-3">
+    
+    <label class="md-nav__link" for="nav-5-1-3">
+      混合渲染
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-3">
+        混合渲染
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/" title="混合渲染" class="md-nav__link">
+      混合渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-4" type="checkbox" id="nav-5-1-4">
+    
+    <label class="md-nav__link" for="nav-5-1-4">
+      图形增强项目
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-4">
+        图形增强项目
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/" title="进度管理" class="md-nav__link">
+      进度管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/experiment/" title="实验结果" class="md-nav__link">
+      实验结果
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/data/" title="数据采集" class="md-nav__link">
+      数据采集
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/dataset/" title="数据集规格" class="md-nav__link">
+      数据集规格
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/related-work/" title="相关工作" class="md-nav__link">
+      相关工作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/convention-anti-aliasing/" title="反走样算法" class="md-nav__link">
+      反走样算法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      虚幻引擎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        虚幻引擎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/final-chapter1/" title="UE4 渲染系统设计浅析 - 4.22 Release" class="md-nav__link">
+      UE4 渲染系统设计浅析 - 4.22 Release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/tutor/" title="虚幻引擎入门" class="md-nav__link">
+      虚幻引擎入门
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/motion-blur/" title="移动设备运动模糊-虚幻引擎" class="md-nav__link">
+      移动设备运动模糊-虚幻引擎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/tile-based-rendering/" title="TBR" class="md-nav__link">
+      TBR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/ue4-note/" title="UE4 笔记" class="md-nav__link">
+      UE4 笔记
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/ue4-tutor/" title="UE4 赛车 Demo" class="md-nav__link">
+      UE4 赛车 Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/ue4/" title="组内 UE4 安装" class="md-nav__link">
+      组内 UE4 安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/blueprint/" title="蓝图 基础概念" class="md-nav__link">
+      蓝图 基础概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/coordinate/" title="UE4 中如何处理 D3D 和 OpenGL 坐标系" class="md-nav__link">
+      UE4 中如何处理 D3D 和 OpenGL 坐标系
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/mesh/" title="Mesh 绘制" class="md-nav__link">
+      Mesh 绘制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/rendering/" title="引擎渲染模块（移动端）虚幻 4.22.2" class="md-nav__link">
+      引擎渲染模块（移动端）虚幻 4.22.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/shader/" title="Shader 编写指南" class="md-nav__link">
+      Shader 编写指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/sota-motion-blur/" title="引擎中的 Motion Blur" class="md-nav__link">
+      引擎中的 Motion Blur
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/vertex-rendering/" title="网格体绘制中的属性" class="md-nav__link">
+      网格体绘制中的属性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/sk_mesh_render/" title="虚幻引擎的渲染管线" class="md-nav__link">
+      虚幻引擎的渲染管线
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ue4/code-review/" title="UE4 运动模糊代码解读" class="md-nav__link">
+      UE4 运动模糊代码解读
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      深度学习
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        深度学习
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/" title="深度学习 | 目录" class="md-nav__link">
+      深度学习 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3-2" type="checkbox" id="nav-5-3-2">
+    
+    <label class="md-nav__link" for="nav-5-3-2">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-3-2">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project-workflow/" title="项目代码流程" class="md-nav__link">
+      项目代码流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+      trtexec 源码分析
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/recurrent/" title="序列建模：循环和递归神经网络" class="md-nav__link">
+      序列建模：循环和递归神经网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/u-net/" title="U-net" class="md-nav__link">
+      U-net
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sr/" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" checked>
+    
+    <label class="md-nav__link" for="nav-5-4">
+      机器视觉
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        机器视觉
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/" title="资料" class="md-nav__link">
+      资料
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        《机器人学中的状态估计》
+      </label>
+    
+    <a href="./" title="《机器人学中的状态估计》" class="md-nav__link md-nav__link--active">
+      《机器人学中的状态估计》
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-1" title="Chapter 1 状态估计" class="md-nav__link">
+    Chapter 1 状态估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" title="1.1 状态估计简史" class="md-nav__link">
+    1.1 状态估计简史
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="1.2 传感器、测量和问题定义" class="md-nav__link">
+    1.2 传感器、测量和问题定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" title="1.3 本书组织结构" class="md-nav__link">
+    1.3 本书组织结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="1.4 与其他教程的关系" class="md-nav__link">
+    1.4 与其他教程的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-2" title="Chapter 2 概率密度函数、高斯概率密度函数" class="md-nav__link">
+    Chapter 2 概率密度函数、高斯概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" title="2.1 概率密度函数" class="md-nav__link">
+    2.1 概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" title="2.1.1 定义" class="md-nav__link">
+    2.1.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" title="2.1.2 贝叶斯公式及推断" class="md-nav__link">
+    2.1.2 贝叶斯公式及推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" title="2.1.3 矩" class="md-nav__link">
+    2.1.3 矩
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214" title="2.1.4 样本均值和样本方差" class="md-nav__link">
+    2.1.4 样本均值和样本方差
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#215" title="2.1.5 统计独立性与不相关性" class="md-nav__link">
+    2.1.5 统计独立性与不相关性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#216" title="2.1.6 归一化积" class="md-nav__link">
+    2.1.6 归一化积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="香农信息和互信息" class="md-nav__link">
+    香农信息和互信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="克罗美拉下界和费歇尔信息量" class="md-nav__link">
+    克罗美拉下界和费歇尔信息量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" title="2.2 高斯概率密度函数" class="md-nav__link">
+    2.2 高斯概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" title="2.2.1 定义" class="md-nav__link">
+    2.2.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isserlis" title="Isserlis 定理" class="md-nav__link">
+    Isserlis 定理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" title="2.2.3 联合高斯概率密度函数，分解与推断" class="md-nav__link">
+    2.2.3 联合高斯概率密度函数，分解与推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" title="2.2.4 统计独立性、不相关性" class="md-nav__link">
+    2.2.4 统计独立性、不相关性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" title="2.2.5 高斯分布随机变量的线性变换" class="md-nav__link">
+    2.2.5 高斯分布随机变量的线性变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226" title="2.2.6 高斯概率密度函数的归一化积" class="md-nav__link">
+    2.2.6 高斯概率密度函数的归一化积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-smw" title="2.2.7 SMW 等式" class="md-nav__link">
+    2.2.7 SMW 等式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228" title="2.2.8 高斯分布随机变量的非线性变换" class="md-nav__link">
+    2.2.8 高斯分布随机变量的非线性变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229" title="2.2.9 高斯分布的香农信息" class="md-nav__link">
+    2.2.9 高斯分布的香农信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210" title="2.2.10 联合高斯概率密度函数的互信息" class="md-nav__link">
+    2.2.10 联合高斯概率密度函数的互信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2211" title="2.2.11 高斯概率密度函数的克拉美罗下界" class="md-nav__link">
+    2.2.11 高斯概率密度函数的克拉美罗下界
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" title="2.3 高斯过程" class="md-nav__link">
+    2.3 高斯过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-3-linear-gaussianlg" title="Chapter 3 状态估计，Linear Gaussian（LG）" class="md-nav__link">
+    Chapter 3 状态估计，Linear Gaussian（LG）
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1 离散时间的批估计" class="md-nav__link">
+    3.1 离散时间的批估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" title="3.1.1 问题定义" class="md-nav__link">
+    3.1.1 问题定义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-4-non-linear-non-gaussian" title="Chapter 4 状态估计，Non Linear Non Gaussian" class="md-nav__link">
+    Chapter 4 状态估计，Non Linear Non Gaussian
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../category/" title="SLAM 类别" class="md-nav__link">
+      SLAM 类别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fej/" title="FEJ" class="md-nav__link">
+      FEJ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../margin/" title="边缘化" class="md-nav__link">
+      边缘化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../filter-optimization/" title="滤波和优化" class="md-nav__link">
+      滤波和优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      研读
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        研读
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/frvsr-cvpr2018/" title="Frame-Recurrent Video Super-Resolution" class="md-nav__link">
+      Frame-Recurrent Video Super-Resolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dacs_hpg2018/" title="Deferred Adaptive Compute Shading" class="md-nav__link">
+      Deferred Adaptive Compute Shading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/cpst-siggraph2018/" title="Coarse Pixel Shading with Temporal Supersampling" class="md-nav__link">
+      Coarse Pixel Shading with Temporal Supersampling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/preintegration/" title="机器视觉 | 预积分" class="md-nav__link">
+      机器视觉 | 预积分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/vins-ismar2017/" title="机器视觉 | VIO-HKUST" class="md-nav__link">
+      机器视觉 | VIO-HKUST
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/msckf/" title="机器视觉 | MSCKF" class="md-nav__link">
+      机器视觉 | MSCKF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/okvis-ijrr2015/" title="机器视觉 | OKVIS" class="md-nav__link">
+      机器视觉 | OKVIS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/orbslam2-/" title="机器视觉 | ORB-SLAM2" class="md-nav__link">
+      机器视觉 | ORB-SLAM2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/ptam/" title="机器视觉 | PTAM" class="md-nav__link">
+      机器视觉 | PTAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/svo/" title="机器视觉 | SVO" class="md-nav__link">
+      机器视觉 | SVO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/lsd/" title="机器视觉 | LSD" class="md-nav__link">
+      机器视觉 | LSD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dso/" title="机器视觉 | DSO" class="md-nav__link">
+      机器视觉 | DSO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/psas-slam/" title="机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)" class="md-nav__link">
+      机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/semantic-fusion/" title="机器视觉 | SemanticFusion(TODO)" class="md-nav__link">
+      机器视觉 | SemanticFusion(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/slam++/" title="机器视觉 | SLAM++(TODO)" class="md-nav__link">
+      机器视觉 | SLAM++(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/motionblur2014/" title="A Fast and Stable Feature-Aware Motion Blur Filter" class="md-nav__link">
+      A Fast and Stable Feature-Aware Motion Blur Filter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      基础
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        基础
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/inside-the-cpp-object-model/" title="《深入探索 C++ 对象模型》" class="md-nav__link">
+      《深入探索 C++ 对象模型》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/effective-c++/" title="《Effective C++》" class="md-nav__link">
+      《Effective C++》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/stl/" title="《STL 源码剖析》" class="md-nav__link">
+      《STL 源码剖析》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/factory/" title="工厂模式" class="md-nav__link">
+      工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/move-semantics/" title="移动语义" class="md-nav__link">
+      移动语义
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/forward/" title="完美转发" class="md-nav__link">
+      完美转发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/enum-class/" title="枚举类" class="md-nav__link">
+      枚举类
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      杂记
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        杂记
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/docker-basic/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/algorithm/" title="算法、数据结构训练" class="md-nav__link">
+      算法、数据结构训练
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/desktop-repair/" title="重装 Ubuntu 18.04 Gnome Desktop" class="md-nav__link">
+      重装 Ubuntu 18.04 Gnome Desktop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/github-proxy/" title="Github Proxy Configuration" class="md-nav__link">
+      Github Proxy Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/gtest-install/" title="Google Test Installation" class="md-nav__link">
+      Google Test Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/numpy-ref/" title="numpy 中文文档" class="md-nav__link">
+      numpy 中文文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/pip-source/" title="pip 源切为国内镜像" class="md-nav__link">
+      pip 源切为国内镜像
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/shadowsocks/" title="Ubuntu-18.04 Shadowsocks配置" class="md-nav__link">
+      Ubuntu-18.04 Shadowsocks配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-rename/" title="Ubuntu 批量重命名" class="md-nav__link">
+      Ubuntu 批量重命名
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/usb-mount/" title="Ubuntu18.04 存储设备挂载" class="md-nav__link">
+      Ubuntu18.04 存储设备挂载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/vscode-pytorch/" title="vscode torch 标红" class="md-nav__link">
+      vscode torch 标红
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/wifi-connection/" title="Console Wi-Fi Connection in Ubuntu 18.04" class="md-nav__link">
+      Console Wi-Fi Connection in Ubuntu 18.04
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/cloud-rendering/" title="Cloud Rendering" class="md-nav__link">
+      Cloud Rendering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-theme/" title="Ubuntu 18.04 Theme" class="md-nav__link">
+      Ubuntu 18.04 Theme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/mkdocs-ch-support/" title="Mkdocs 中文支持" class="md-nav__link">
+      Mkdocs 中文支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/introduction/" title="论文写作" class="md-nav__link">
+      论文写作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/pfm-cpp/" title="PFM 图片读写" class="md-nav__link">
+      PFM 图片读写
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../github-project-boards/" title="组内开发说明" class="md-nav__link">
+      组内开发说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-branch-name/" title="Git 分支命名规范" class="md-nav__link">
+      Git 分支命名规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-commit-log/" title="Git Commit Log 规范" class="md-nav__link">
+      Git Commit Log 规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/review/" title="论文 review" class="md-nav__link">
+      论文 review
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/slam-jd/" title="机器视觉笔试、面试" class="md-nav__link">
+      机器视觉笔试、面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/method/" title="结构化思维" class="md-nav__link">
+      结构化思维
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-1" title="Chapter 1 状态估计" class="md-nav__link">
+    Chapter 1 状态估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" title="1.1 状态估计简史" class="md-nav__link">
+    1.1 状态估计简史
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="1.2 传感器、测量和问题定义" class="md-nav__link">
+    1.2 传感器、测量和问题定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" title="1.3 本书组织结构" class="md-nav__link">
+    1.3 本书组织结构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="1.4 与其他教程的关系" class="md-nav__link">
+    1.4 与其他教程的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-2" title="Chapter 2 概率密度函数、高斯概率密度函数" class="md-nav__link">
+    Chapter 2 概率密度函数、高斯概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" title="2.1 概率密度函数" class="md-nav__link">
+    2.1 概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" title="2.1.1 定义" class="md-nav__link">
+    2.1.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" title="2.1.2 贝叶斯公式及推断" class="md-nav__link">
+    2.1.2 贝叶斯公式及推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" title="2.1.3 矩" class="md-nav__link">
+    2.1.3 矩
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214" title="2.1.4 样本均值和样本方差" class="md-nav__link">
+    2.1.4 样本均值和样本方差
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#215" title="2.1.5 统计独立性与不相关性" class="md-nav__link">
+    2.1.5 统计独立性与不相关性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#216" title="2.1.6 归一化积" class="md-nav__link">
+    2.1.6 归一化积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="香农信息和互信息" class="md-nav__link">
+    香农信息和互信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="克罗美拉下界和费歇尔信息量" class="md-nav__link">
+    克罗美拉下界和费歇尔信息量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" title="2.2 高斯概率密度函数" class="md-nav__link">
+    2.2 高斯概率密度函数
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" title="2.2.1 定义" class="md-nav__link">
+    2.2.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isserlis" title="Isserlis 定理" class="md-nav__link">
+    Isserlis 定理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" title="2.2.3 联合高斯概率密度函数，分解与推断" class="md-nav__link">
+    2.2.3 联合高斯概率密度函数，分解与推断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" title="2.2.4 统计独立性、不相关性" class="md-nav__link">
+    2.2.4 统计独立性、不相关性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" title="2.2.5 高斯分布随机变量的线性变换" class="md-nav__link">
+    2.2.5 高斯分布随机变量的线性变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226" title="2.2.6 高斯概率密度函数的归一化积" class="md-nav__link">
+    2.2.6 高斯概率密度函数的归一化积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-smw" title="2.2.7 SMW 等式" class="md-nav__link">
+    2.2.7 SMW 等式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228" title="2.2.8 高斯分布随机变量的非线性变换" class="md-nav__link">
+    2.2.8 高斯分布随机变量的非线性变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229" title="2.2.9 高斯分布的香农信息" class="md-nav__link">
+    2.2.9 高斯分布的香农信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210" title="2.2.10 联合高斯概率密度函数的互信息" class="md-nav__link">
+    2.2.10 联合高斯概率密度函数的互信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2211" title="2.2.11 高斯概率密度函数的克拉美罗下界" class="md-nav__link">
+    2.2.11 高斯概率密度函数的克拉美罗下界
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" title="2.3 高斯过程" class="md-nav__link">
+    2.3 高斯过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-3-linear-gaussianlg" title="Chapter 3 状态估计，Linear Gaussian（LG）" class="md-nav__link">
+    Chapter 3 状态估计，Linear Gaussian（LG）
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" title="3.1 离散时间的批估计" class="md-nav__link">
+    3.1 离散时间的批估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" title="3.1.1 问题定义" class="md-nav__link">
+    3.1.1 问题定义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-4-non-linear-non-gaussian" title="Chapter 4 状态估计，Non Linear Non Gaussian" class="md-nav__link">
+    Chapter 4 状态估计，Non Linear Non Gaussian
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="_1">《机器人学中的状态估计》</h1>
+<p>详细描述了三维空间机器人的状态估计，值得一读。</p>
+<h2 id="chapter-1">Chapter 1 状态估计</h2>
+<ul>
+<li>机器人学中的重要问题：状态估计和控制</li>
+<li>状态：一组完整描述他随时间运动的物理量，如位置、速度、角速度</li>
+</ul>
+<h3 id="11">1.1 状态估计简史</h3>
+<ul>
+<li>航海定位</li>
+<li>天文学是状态估计理论起源<ul>
+<li>高斯证明了正态分布误差假设下，最小二乘即最优解</li>
+</ul>
+</li>
+<li>卡尔曼<ul>
+<li>能关性：动态系统的状态何时能从该系统的一组观测值中推断出来</li>
+<li>卡尔曼滤波，估计系统状态的优化框架，针对受高斯观测噪声影响的线性系统状态估计方法</li>
+</ul>
+</li>
+<li>新型传感器兴起<ul>
+<li>相机、激光、GPS</li>
+</ul>
+</li>
+</ul>
+<h3 id="12">1.2 传感器、测量和问题定义</h3>
+<ul>
+<li>interoceptive<ul>
+<li>加速度计、陀螺仪、轮式编码器</li>
+</ul>
+</li>
+<li>exteroceptive<ul>
+<li>相机、ToF（激光、GPS）</li>
+</ul>
+</li>
+</ul>
+<p>最好的状态估计：同时有效融合内感受型、外感受型传感器观测值</p>
+<ul>
+<li>状态估计：根据系统先验模型和测量序列，对系统内在状态进行重构。</li>
+</ul>
+<h3 id="13">1.3 本书组织结构</h3>
+<ul>
+<li>
+<p>状态估计机理</p>
+<ul>
+<li>递归、批方法</li>
+<li>贝叶斯方法、最大后验估计</li>
+<li>连续时间状态估计、高斯过程回归方法</li>
+<li>鲁棒估计和偏差</li>
+</ul>
+</li>
+<li>
+<p>三维空间运动机理</p>
+<ul>
+<li>李群李代数</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>结合前两部分</li>
+</ul>
+</li>
+</ul>
+<h3 id="14">1.4 与其他教程的关系</h3>
+<p>唯一同时涉及以下主题的书籍</p>
+<ul>
+<li>三维空间</li>
+<li>状态估计</li>
+</ul>
+<h2 id="chapter-2">Chapter 2 概率密度函数、高斯概率密度函数</h2>
+<p>引入贝叶斯公式</p>
+<h3 id="21">2.1 概率密度函数</h3>
+<h4 id="211">2.1.1 定义</h4>
+<ul>
+<li>全概率公理</li>
+<li>概率密度</li>
+<li>条件概率</li>
+<li>联合概率密度</li>
+</ul>
+<h4 id="212">2.1.2 贝叶斯公式及推断</h4>
+<ul>
+<li>
+<p><span><span class="MathJax_Preview">p(x|y) = \frac{p(y|x)p(x)}{p(y)}</span><script type="math/tex">p(x|y) = \frac{p(y|x)p(x)}{p(y)}</script></span></p>
+</li>
+<li>
+<p><span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> 先验</p>
+</li>
+<li>
+<p><span><span class="MathJax_Preview">p(x|y)</span><script type="math/tex">p(x|y)</script></span> 后验</p>
+</li>
+<li>
+<p>在状态估计中，状态的先验 <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> 和传感器模型 <span><span class="MathJax_Preview">p(y|x)</span><script type="math/tex">p(y|x)</script></span> 推出状态的后验 <span><span class="MathJax_Preview">p(x|y)</span><script type="math/tex">p(x|y)</script></span></p>
+</li>
+<li>
+<p>边缘化计算 <span><span class="MathJax_Preview">p(y)</span><script type="math/tex">p(y)</script></span>：<span><span class="MathJax_Preview">p(y)=\int{p(y|x)p(x)\mathrm{d}x}</span><script type="math/tex">p(y)=\int{p(y|x)p(x)\mathrm{d}x}</script></span></p>
+</li>
+<li>
+<p>贝叶斯推断：利用观测来修正估计</p>
+</li>
+</ul>
+<h4 id="213">2.1.3 矩</h4>
+<ul>
+<li>概率零阶矩：全事件概率</li>
+<li>概率一阶矩：期望</li>
+<li>概率二阶矩：协方差矩阵</li>
+</ul>
+<h4 id="214">2.1.4 样本均值和样本方差</h4>
+<ul>
+<li>样本为随机变量的一次实现</li>
+<li>通过样本估计随机变量的期望和方差</li>
+<li>方差的贝塞尔修正</li>
+</ul>
+<h4 id="215">2.1.5 统计独立性与不相关性</h4>
+<ul>
+<li>
+<p>统计独立</p>
+<ul>
+<li><span><span class="MathJax_Preview">p(x, y) = p(x)p(y)</span><script type="math/tex">p(x, y) = p(x)p(y)</script></span></li>
+</ul>
+</li>
+<li>
+<p>不相关</p>
+<ul>
+<li><span><span class="MathJax_Preview">\mathrm{E}[xy^{T}] = \mathrm{E}[x]\mathrm{E}[y]</span><script type="math/tex">\mathrm{E}[xy^{T}] = \mathrm{E}[x]\mathrm{E}[y]</script></span></li>
+</ul>
+</li>
+</ul>
+<h4 id="216">2.1.6 归一化积</h4>
+<p>一个随机变量的两个概率密度函数归一化</p>
+<p><span><span class="MathJax_Preview">p(x) = \eta p_{1}(x)p_{2}(x)</span><script type="math/tex">p(x) = \eta p_{1}(x)p_{2}(x)</script></span></p>
+<h4 id="_2">香农信息和互信息</h4>
+<ul>
+<li>不确定性描述</li>
+</ul>
+<h4 id="_3">克罗美拉下界和费歇尔信息量</h4>
+<ul>
+<li>克罗美拉下界：参数估计的协方差的下界由费歇尔信息矩阵定义</li>
+</ul>
+<h3 id="22">2.2 高斯概率密度函数</h3>
+<h4 id="221">2.2.1 定义</h4>
+<h4 id="isserlis">Isserlis 定理</h4>
+<ul>
+<li>定理用于计算高阶矩</li>
+</ul>
+<h4 id="223">2.2.3 联合高斯概率密度函数，分解与推断</h4>
+<ul>
+<li>联合概率分布，分解为条件概率及边缘概率</li>
+<li>利用舒尔补推演多元高斯分布的分解过程</li>
+<li>高斯推断：利用观测值，修正先验概率分布均值、减小协方差</li>
+</ul>
+<h4 id="224">2.2.4 统计独立性、不相关性</h4>
+<ul>
+<li>高斯概率密度函数下，统计独立性和不相关性等价</li>
+</ul>
+<h4 id="225">2.2.5 高斯分布随机变量的线性变换</h4>
+<ul>
+<li><span><span class="MathJax_Preview">x \in \mathbb{R}^{N} \sim \mathcal{N}(\mu_x, \Sigma_{xx})</span><script type="math/tex">x \in \mathbb{R}^{N} \sim \mathcal{N}(\mu_x, \Sigma_{xx})</script></span></li>
+<li><span><span class="MathJax_Preview">y= Gx</span><script type="math/tex">y= Gx</script></span>，<span><span class="MathJax_Preview">G \in \mathbb{R}^{M \times N}</span><script type="math/tex">G \in \mathbb{R}^{M \times N}</script></span></li>
+<li><span><span class="MathJax_Preview">y \in \mathbb{R}^{M} \sim \mathcal{N}(G\mu_x, G\Sigma_{xx}G^T)</span><script type="math/tex">y \in \mathbb{R}^{M} \sim \mathcal{N}(G\mu_x, G\Sigma_{xx}G^T)</script></span></li>
+</ul>
+<h4 id="226">2.2.6 高斯概率密度函数的归一化积</h4>
+<ul>
+<li>K 个高斯概率密度分布的积仍是高斯</li>
+<li>对于线性变换，仍有类似结果</li>
+</ul>
+<h4 id="227-smw">2.2.7 SMW 等式</h4>
+<ul>
+<li>可逆矩阵经过上三角、下三角分解，求逆，由一个恒等式引出的四个不同等式</li>
+<li>又称矩阵求逆引理</li>
+</ul>
+<h4 id="228">2.2.8 高斯分布随机变量的非线性变换</h4>
+<ul>
+<li><span><span class="MathJax_Preview">p(y) = \int_{-\infty}^{\infty} p(y|x) p(x) \mathrm{d}x</span><script type="math/tex">p(y) = \int_{-\infty}^{\infty} p(y|x) p(x) \mathrm{d}x</script></span>，贝叶斯推断分母存在这样的变换</li>
+<li><span><span class="MathJax_Preview">p(y|x) = \mathcal{N}(g(x), R)</span><script type="math/tex">p(y|x) = \mathcal{N}(g(x), R)</script></span>，表示非线性变换后，仍受一个零均值高斯噪声影响，常见于传感器中</li>
+<li><span><span class="MathJax_Preview">p(x) = \mathcal{N}(\mu_x, \Sigma_{xx})</span><script type="math/tex">p(x) = \mathcal{N}(\mu_x, \Sigma_{xx})</script></span>，理解为状态量，高斯分布</li>
+</ul>
+<p>一般情况下的线性化处理</p>
+<ul>
+<li><span><span class="MathJax_Preview">g(x) \approx \mu_y + G(x-\mu_x)</span><script type="math/tex">g(x) \approx \mu_y + G(x-\mu_x)</script></span> 泰勒公式</li>
+<li><span><span class="MathJax_Preview">G=\frac{\partial g(x)}{\partial x} \rvert_{x=\mu_x}</span><script type="math/tex">G=\frac{\partial g(x)}{\partial x} \rvert_{x=\mu_x}</script></span></li>
+<li><span><span class="MathJax_Preview">\mu_y=g(\mu_x)</span><script type="math/tex">\mu_y=g(\mu_x)</script></span></li>
+</ul>
+<p>-</p>
+<ul>
+<li><span><span class="MathJax_Preview">p(y)=\rho \exp{(-\frac{1}{2}(y-\mu_y)^T(R+G\Sigma_{xx}G^T)^{-1}(y-\mu_y))}</span><script type="math/tex">p(y)=\rho \exp{(-\frac{1}{2}(y-\mu_y)^T(R+G\Sigma_{xx}G^T)^{-1}(y-\mu_y))}</script></span>，为离散时间卡尔曼滤波的观测部分</li>
+</ul>
+<h4 id="229">2.2.9 高斯分布的香农信息</h4>
+<p>协方差</p>
+<h4 id="2210">2.2.10 联合高斯概率密度函数的互信息</h4>
+<p>直接代入计算</p>
+<h4 id="2211">2.2.11 高斯概率密度函数的克拉美罗下界</h4>
+<p><span><span class="MathJax_Preview">\frac{1}{K} \Sigma</span><script type="math/tex">\frac{1}{K} \Sigma</script></span></p>
+<h3 id="23">2.3 高斯过程</h3>
+<p>时间 t 上的连续状态量</p>
+<ul>
+<li>GP 的分布就是对于时间域上所有随机变量的联合分布</li>
+<li>GP 任意个样本点（对应不同时刻的随机变量）联合需要服从多元高斯分布</li>
+<li>GP 协方差刻画轨迹的平滑程度</li>
+<li>GP 协方差又称 Kernels</li>
+</ul>
+<p>可以参看链接中的图，对高斯过程状态有初步印象 https://www.studyai.cn/modules/gaussian_process.html</p>
+<h2 id="chapter-3-linear-gaussianlg">Chapter 3 状态估计，Linear Gaussian（LG）</h2>
+<h3 id="31">3.1 离散时间的批估计</h3>
+<h4 id="311">3.1.1 问题定义</h4>
+<ul>
+<li>运动方程：<span><span class="MathJax_Preview">x_k = A_{k-1}x_{k-1} + v_k + w_k</span><script type="math/tex">x_k = A_{k-1}x_{k-1} + v_k + w_k</script></span></li>
+<li>观测方程：<span><span class="MathJax_Preview">y_k = C_kx_k + n_k</span><script type="math/tex">y_k = C_kx_k + n_k</script></span></li>
+</ul>
+<p>最大后验估计、贝叶斯推断，两种方法估计系统状态
+LG状态估计的根本推导来源于此
+批估计，利用全部观测、数据推断当前时刻状态，利用Cholesky分解、RTS平滑算法
+递归估计，当前时刻状态仅由之前信息决定。</p>
+<p>关联：
+利用贝叶斯公式、马尔可夫性、条件独立，
+利用最大后验估计，极值点，
+利用运动-观测方程的线性高斯分布，
+连立求解出系统状态
+利用Cholesky分解，进行批估计，批估计利用所有时刻信息来预测状态
+通过边缘化，得到关于某时刻的估计，估计又分为利用k之前信息以及k未来信息
+仅利用k之前信息进行估计，得到前向估计，称为滤波，Filter
+进一步，k可以利用k-1信息得到结果，得到卡尔曼滤波形式
+（MAP、贝叶斯两种推导）</p>
+<h2 id="chapter-4-non-linear-non-gaussian">Chapter 4 状态估计，Non Linear Non Gaussian</h2>
+<p>4.22推导至关重要。
+在贝叶斯框架下，发展出高斯滤波 粒子滤波
+利用在k处线性化，
+推导出扩展卡尔曼滤波
+SLAM系统的滤波和优化方法笔记 - 王琳的博文 </p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../reference/" title="资料" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                资料
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../category/" title="SLAM 类别" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                SLAM 类别
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 lijiankuan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

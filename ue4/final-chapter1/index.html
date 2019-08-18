@@ -1,0 +1,2543 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="工作、编程记录">
+      
+      
+      
+        <meta name="author" content="李健宽">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/code.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+    
+    
+      
+        <title>UE4 渲染系统设计浅析 - 4.22 Release - 李健宽——手札</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Noto Serif SC","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#ue4-422-release" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="李健宽——手札" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/images/logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              李健宽——手札
+            </span>
+            <span class="md-header-nav__topic">
+              UE4 渲染系统设计浅析 - 4.22 Release
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="扉页" class="md-tabs__link">
+        扉页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../graphics/" title="领域" class="md-tabs__link">
+          领域
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../reading/frvsr-cvpr2018/" title="研读" class="md-tabs__link">
+          研读
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../cplusplus/inside-the-cpp-object-model/" title="基础" class="md-tabs__link">
+          基础
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../gist/docker-basic/" title="杂记" class="md-tabs__link">
+          杂记
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="李健宽——手札" class="md-nav__button md-logo">
+      
+        <img src="../../assets/images/logo.svg" width="48" height="48">
+      
+    </a>
+    李健宽——手札
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="扉页" class="md-nav__link">
+      扉页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ems-rendering/" title="图形学 | 大型场景渲染" class="md-nav__link">
+      图形学 | 大型场景渲染
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../frss/" title="深度学习 | 深度学习图形增强" class="md-nav__link">
+      深度学习 | 深度学习图形增强
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ar/" title="AR | 联合导航" class="md-nav__link">
+      AR | 联合导航
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      领域
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        领域
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      图形学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        图形学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/" title="图形学 | 目录" class="md-nav__link">
+      图形学 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      基本算法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        基本算法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/cloud-rendering/" title="图形学 | 云渲染" class="md-nav__link">
+      图形学 | 云渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/shadow/" title="引擎中的阴影" class="md-nav__link">
+      引擎中的阴影
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-3" type="checkbox" id="nav-5-1-3">
+    
+    <label class="md-nav__link" for="nav-5-1-3">
+      混合渲染
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-3">
+        混合渲染
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/" title="混合渲染" class="md-nav__link">
+      混合渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-4" type="checkbox" id="nav-5-1-4">
+    
+    <label class="md-nav__link" for="nav-5-1-4">
+      图形增强项目
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-4">
+        图形增强项目
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/" title="进度管理" class="md-nav__link">
+      进度管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/experiment/" title="实验结果" class="md-nav__link">
+      实验结果
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/data/" title="数据采集" class="md-nav__link">
+      数据采集
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/dataset/" title="数据集规格" class="md-nav__link">
+      数据集规格
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/related-work/" title="相关工作" class="md-nav__link">
+      相关工作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/convention-anti-aliasing/" title="反走样算法" class="md-nav__link">
+      反走样算法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2" checked>
+    
+    <label class="md-nav__link" for="nav-5-2">
+      虚幻引擎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        虚幻引擎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        UE4 渲染系统设计浅析 - 4.22 Release
+      </label>
+    
+    <a href="./" title="UE4 渲染系统设计浅析 - 4.22 Release" class="md-nav__link md-nav__link--active">
+      UE4 渲染系统设计浅析 - 4.22 Release
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="基本图形渲染流程" class="md-nav__link">
+    基本图形渲染流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apiue4" title="现代图形 API：UE4 渲染系统设计来源之一" class="md-nav__link">
+    现代图形 API：UE4 渲染系统设计来源之一
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-cpu" title="现代图形 API 专注于 CPU 资源利用率上的改进" class="md-nav__link">
+    现代图形 API 专注于 CPU 资源利用率上的改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-buffer-commands" title="Command Buffer 用于记录 Commands" class="md-nav__link">
+    Command Buffer 用于记录 Commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="应用程序控制优化" class="md-nav__link">
+    应用程序控制优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ue4" title="UE4 渲染子系统设计理念" class="md-nav__link">
+    UE4 渲染子系统设计理念
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="流程一览" class="md-nav__link">
+    流程一览
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="渲染相关类" class="md-nav__link">
+    渲染相关类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderer" title="Renderer 流程" class="md-nav__link">
+    Renderer 流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="游戏线程、渲染线程" class="md-nav__link">
+    游戏线程、渲染线程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="网格体绘制流程" class="md-nav__link">
+    网格体绘制流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="后处理流程" class="md-nav__link">
+    后处理流程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-state-object" title="Pipeline State Object" class="md-nav__link">
+    Pipeline State Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frhicommandlist" title="FRHICommandList" class="md-nav__link">
+    FRHICommandList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-graph" title="Render Graph 资源控制" class="md-nav__link">
+    Render Graph 资源控制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postprocessing-graph" title="PostProcessing Graph" class="md-nav__link">
+    PostProcessing Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" title="跨平台，跨 API 调用" class="md-nav__link">
+    跨平台，跨 API 调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass" title="材质、顶点、Pass 代码解耦" class="md-nav__link">
+    材质、顶点、Pass 代码解耦
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pso-cache" title="利用 PSO Cache 改善载入时性能" class="md-nav__link">
+    利用 PSO Cache 改善载入时性能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-command" title="复用 Draw Command 资源" class="md-nav__link">
+    复用 Draw Command 资源
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" title="其他特性" class="md-nav__link">
+    其他特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rhi" title="RHI 线程" class="md-nav__link">
+    RHI 线程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderpass" title="合并 RenderPass 减少移动端开销" class="md-nav__link">
+    合并 RenderPass 减少移动端开销
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tutor/" title="虚幻引擎入门" class="md-nav__link">
+      虚幻引擎入门
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../motion-blur/" title="移动设备运动模糊-虚幻引擎" class="md-nav__link">
+      移动设备运动模糊-虚幻引擎
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tile-based-rendering/" title="TBR" class="md-nav__link">
+      TBR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4-note/" title="UE4 笔记" class="md-nav__link">
+      UE4 笔记
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4-tutor/" title="UE4 赛车 Demo" class="md-nav__link">
+      UE4 赛车 Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4/" title="组内 UE4 安装" class="md-nav__link">
+      组内 UE4 安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blueprint/" title="蓝图 基础概念" class="md-nav__link">
+      蓝图 基础概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../coordinate/" title="UE4 中如何处理 D3D 和 OpenGL 坐标系" class="md-nav__link">
+      UE4 中如何处理 D3D 和 OpenGL 坐标系
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mesh/" title="Mesh 绘制" class="md-nav__link">
+      Mesh 绘制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rendering/" title="引擎渲染模块（移动端）虚幻 4.22.2" class="md-nav__link">
+      引擎渲染模块（移动端）虚幻 4.22.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader/" title="Shader 编写指南" class="md-nav__link">
+      Shader 编写指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sota-motion-blur/" title="引擎中的 Motion Blur" class="md-nav__link">
+      引擎中的 Motion Blur
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vertex-rendering/" title="网格体绘制中的属性" class="md-nav__link">
+      网格体绘制中的属性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sk_mesh_render/" title="虚幻引擎的渲染管线" class="md-nav__link">
+      虚幻引擎的渲染管线
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../code-review/" title="UE4 运动模糊代码解读" class="md-nav__link">
+      UE4 运动模糊代码解读
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      深度学习
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        深度学习
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/" title="深度学习 | 目录" class="md-nav__link">
+      深度学习 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3-2" type="checkbox" id="nav-5-3-2">
+    
+    <label class="md-nav__link" for="nav-5-3-2">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-3-2">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project-workflow/" title="项目代码流程" class="md-nav__link">
+      项目代码流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+      trtexec 源码分析
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/recurrent/" title="序列建模：循环和递归神经网络" class="md-nav__link">
+      序列建模：循环和递归神经网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/u-net/" title="U-net" class="md-nav__link">
+      U-net
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sr/" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      机器视觉
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        机器视觉
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/reference/" title="资料" class="md-nav__link">
+      资料
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/state-estimation/" title="《机器人学中的状态估计》" class="md-nav__link">
+      《机器人学中的状态估计》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/category/" title="SLAM 类别" class="md-nav__link">
+      SLAM 类别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/fej/" title="FEJ" class="md-nav__link">
+      FEJ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/margin/" title="边缘化" class="md-nav__link">
+      边缘化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/filter-optimization/" title="滤波和优化" class="md-nav__link">
+      滤波和优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      研读
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        研读
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/frvsr-cvpr2018/" title="Frame-Recurrent Video Super-Resolution" class="md-nav__link">
+      Frame-Recurrent Video Super-Resolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dacs_hpg2018/" title="Deferred Adaptive Compute Shading" class="md-nav__link">
+      Deferred Adaptive Compute Shading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/cpst-siggraph2018/" title="Coarse Pixel Shading with Temporal Supersampling" class="md-nav__link">
+      Coarse Pixel Shading with Temporal Supersampling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/preintegration/" title="机器视觉 | 预积分" class="md-nav__link">
+      机器视觉 | 预积分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/vins-ismar2017/" title="机器视觉 | VIO-HKUST" class="md-nav__link">
+      机器视觉 | VIO-HKUST
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/msckf/" title="机器视觉 | MSCKF" class="md-nav__link">
+      机器视觉 | MSCKF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/okvis-ijrr2015/" title="机器视觉 | OKVIS" class="md-nav__link">
+      机器视觉 | OKVIS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/orbslam2-/" title="机器视觉 | ORB-SLAM2" class="md-nav__link">
+      机器视觉 | ORB-SLAM2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/ptam/" title="机器视觉 | PTAM" class="md-nav__link">
+      机器视觉 | PTAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/svo/" title="机器视觉 | SVO" class="md-nav__link">
+      机器视觉 | SVO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/lsd/" title="机器视觉 | LSD" class="md-nav__link">
+      机器视觉 | LSD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dso/" title="机器视觉 | DSO" class="md-nav__link">
+      机器视觉 | DSO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/psas-slam/" title="机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)" class="md-nav__link">
+      机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/semantic-fusion/" title="机器视觉 | SemanticFusion(TODO)" class="md-nav__link">
+      机器视觉 | SemanticFusion(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/slam++/" title="机器视觉 | SLAM++(TODO)" class="md-nav__link">
+      机器视觉 | SLAM++(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/motionblur2014/" title="A Fast and Stable Feature-Aware Motion Blur Filter" class="md-nav__link">
+      A Fast and Stable Feature-Aware Motion Blur Filter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      基础
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        基础
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/inside-the-cpp-object-model/" title="《深入探索 C++ 对象模型》" class="md-nav__link">
+      《深入探索 C++ 对象模型》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/effective-c++/" title="《Effective C++》" class="md-nav__link">
+      《Effective C++》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/stl/" title="《STL 源码剖析》" class="md-nav__link">
+      《STL 源码剖析》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/factory/" title="工厂模式" class="md-nav__link">
+      工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/move-semantics/" title="移动语义" class="md-nav__link">
+      移动语义
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/forward/" title="完美转发" class="md-nav__link">
+      完美转发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/enum-class/" title="枚举类" class="md-nav__link">
+      枚举类
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      杂记
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        杂记
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/docker-basic/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/algorithm/" title="算法、数据结构训练" class="md-nav__link">
+      算法、数据结构训练
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/desktop-repair/" title="重装 Ubuntu 18.04 Gnome Desktop" class="md-nav__link">
+      重装 Ubuntu 18.04 Gnome Desktop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/github-proxy/" title="Github Proxy Configuration" class="md-nav__link">
+      Github Proxy Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/gtest-install/" title="Google Test Installation" class="md-nav__link">
+      Google Test Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/numpy-ref/" title="numpy 中文文档" class="md-nav__link">
+      numpy 中文文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/pip-source/" title="pip 源切为国内镜像" class="md-nav__link">
+      pip 源切为国内镜像
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/shadowsocks/" title="Ubuntu-18.04 Shadowsocks配置" class="md-nav__link">
+      Ubuntu-18.04 Shadowsocks配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-rename/" title="Ubuntu 批量重命名" class="md-nav__link">
+      Ubuntu 批量重命名
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/usb-mount/" title="Ubuntu18.04 存储设备挂载" class="md-nav__link">
+      Ubuntu18.04 存储设备挂载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/vscode-pytorch/" title="vscode torch 标红" class="md-nav__link">
+      vscode torch 标红
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/wifi-connection/" title="Console Wi-Fi Connection in Ubuntu 18.04" class="md-nav__link">
+      Console Wi-Fi Connection in Ubuntu 18.04
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/cloud-rendering/" title="Cloud Rendering" class="md-nav__link">
+      Cloud Rendering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-theme/" title="Ubuntu 18.04 Theme" class="md-nav__link">
+      Ubuntu 18.04 Theme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/mkdocs-ch-support/" title="Mkdocs 中文支持" class="md-nav__link">
+      Mkdocs 中文支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/introduction/" title="论文写作" class="md-nav__link">
+      论文写作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/pfm-cpp/" title="PFM 图片读写" class="md-nav__link">
+      PFM 图片读写
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../github-project-boards/" title="组内开发说明" class="md-nav__link">
+      组内开发说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-branch-name/" title="Git 分支命名规范" class="md-nav__link">
+      Git 分支命名规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-commit-log/" title="Git Commit Log 规范" class="md-nav__link">
+      Git Commit Log 规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/review/" title="论文 review" class="md-nav__link">
+      论文 review
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/slam-jd/" title="机器视觉笔试、面试" class="md-nav__link">
+      机器视觉笔试、面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/method/" title="结构化思维" class="md-nav__link">
+      结构化思维
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="基本图形渲染流程" class="md-nav__link">
+    基本图形渲染流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apiue4" title="现代图形 API：UE4 渲染系统设计来源之一" class="md-nav__link">
+    现代图形 API：UE4 渲染系统设计来源之一
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-cpu" title="现代图形 API 专注于 CPU 资源利用率上的改进" class="md-nav__link">
+    现代图形 API 专注于 CPU 资源利用率上的改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-buffer-commands" title="Command Buffer 用于记录 Commands" class="md-nav__link">
+    Command Buffer 用于记录 Commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="应用程序控制优化" class="md-nav__link">
+    应用程序控制优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ue4" title="UE4 渲染子系统设计理念" class="md-nav__link">
+    UE4 渲染子系统设计理念
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="流程一览" class="md-nav__link">
+    流程一览
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="渲染相关类" class="md-nav__link">
+    渲染相关类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderer" title="Renderer 流程" class="md-nav__link">
+    Renderer 流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="游戏线程、渲染线程" class="md-nav__link">
+    游戏线程、渲染线程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="网格体绘制流程" class="md-nav__link">
+    网格体绘制流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="后处理流程" class="md-nav__link">
+    后处理流程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-state-object" title="Pipeline State Object" class="md-nav__link">
+    Pipeline State Object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frhicommandlist" title="FRHICommandList" class="md-nav__link">
+    FRHICommandList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-graph" title="Render Graph 资源控制" class="md-nav__link">
+    Render Graph 资源控制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postprocessing-graph" title="PostProcessing Graph" class="md-nav__link">
+    PostProcessing Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" title="跨平台，跨 API 调用" class="md-nav__link">
+    跨平台，跨 API 调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass" title="材质、顶点、Pass 代码解耦" class="md-nav__link">
+    材质、顶点、Pass 代码解耦
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pso-cache" title="利用 PSO Cache 改善载入时性能" class="md-nav__link">
+    利用 PSO Cache 改善载入时性能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-command" title="复用 Draw Command 资源" class="md-nav__link">
+    复用 Draw Command 资源
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" title="其他特性" class="md-nav__link">
+    其他特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rhi" title="RHI 线程" class="md-nav__link">
+    RHI 线程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderpass" title="合并 RenderPass 减少移动端开销" class="md-nav__link">
+    合并 RenderPass 减少移动端开销
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="ue4-422-release">UE4 渲染系统设计浅析 - 4.22 Release</h1>
+<p>本文旨在分析 UE4 中的渲染系统设计理念。</p>
+<p>本文仅涉及与图形渲染最相关的理念。</p>
+<p>还未完成...待填坑</p>
+<p>我们将从传统图形渲染流程开始，回顾渲染的基本流程；之后，由于渲染系统中的一些设计理念与现代图形 API 的强关联，我们先从 Vulkan、D3D12 新特性切入，再讲述 UE4 中设计与这些新特性的对应关系；而后针对游戏引擎，探讨渲染系统还需要引入什么设计；最终我们将串起这些概念，总结 UE4 渲染系统设计动机及模式。</p>
+<p>现有的与渲染相关的优质资料集中在以下几个方面：</p>
+<ol>
+<li>如何添加 RenderPass <a href="https://www.unrealengine.com/zh-CN/tech-blog/how-to-add-global-shaders-to-ue4?lang=zh-CN">如何为 UE4 添加全局着色器（Global Shaders）</a>、<a href="https://docs.unrealengine.com/zh-CN/Programming/Rendering/MeshDrawingPipeline/index.html">网格体绘制管道 | 虚幻引擎文档</a></li>
+<li>如何添加 Shading Model（注：4.22 重构网格体绘制后，系列中关于 DrawPolicy 的描述不再有参考价值）<a href="https://medium.com/@lordned/unreal-engine-4-rendering-overview-part-1-c47f2da65346">Unreal Engine 4 Rendering Part 1~6</a></li>
+<li>基本概念的阐述 <a href="https://docs.unrealengine.com/zh-CN/Programming/Rendering/index.html">图形编程 | 虚幻引擎文档</a> </li>
+<li>RenderPass 流程分析</li>
+<li>渲染系统概览（注：作者将整个系统代码流程扒下来，非常直观，不过同样需注意 4.22 版本重构导致的变动）<a href="https://blog.csdn.net/leonwei/article/details/84821849">UE4 Render System Sheet（UE4渲染系统概览）</a></li>
+</ol>
+<p>他们聚焦于其中某一个子功能，在渲染系统设计动机方面的讨论较少。</p>
+<p>接下来将从渲染系统演化、模式、要素描述引擎渲染子系统设计思想。</p>
+<h2 id="_1">基本图形渲染流程</h2>
+<p><img alt="" src="../../assets/ue4/graphics-render.jpg" /></p>
+<p>以下是 UE4 渲染系统中与上述流程对应的概念：</p>
+<ul>
+<li>RenderPass：BasePass、Decal、Transparency、PostProcess...</li>
+<li>RenderState：SetDepthStencilState、SetBlendState...</li>
+<li>Shader：Vertex Shader、Geometry Shader、Pixel Shader...</li>
+<li>Material：Texture、Uniform</li>
+<li>Geometry/Object State：Vertex Buffers、Index Buffers</li>
+<li>DrawCall：RHI</li>
+</ul>
+<p>上图是一段比较典型的图形应用程序中的主循环伪代码。UE4 使用的也是这样的流程，如：UE4 FDeferredShadingSceneRenderer::Render 中，调用了 RenderBasePass、RenderShadowDepthMaps、RenderVelocities 等 RenderPass；而 BasePass 渲染时，首先设定 RenderState；再设定 BasePassVertexShader、BasePassPixelShader；然后对 Shader 参数进行绑定，含各种材质、Uniform 的绑定；之后通过绑定 Index Buffer、Vertex Buffer，设定 GPU 渲染顶点数据；最终通过 RHI 间接调用 Vulkan/D3D/OGL，提交绘制命令。</p>
+<h2 id="apiue4">现代图形 API：UE4 渲染系统设计来源之一</h2>
+<p>UE4 渲染系统一方面会随着新图形 API 的出现，在系统底层封装成图形接口无关的 API，另一方面会借鉴现代图形 API 设计理念（如，为多线程设计的组件），将其融入自身的设计哲学中。</p>
+<p>本章节来回顾现代图形学 API 中的几个概念。这些概念被 UE4 延用，成为平台无关的渲染子系统的一部分，对子系统封装的众多 API 提供一致的功能，用于减轻游戏客户端 CPU 负担。</p>
+<!-- ### 传统图形 API CPU 利用率低下
+
+传统图形 API （OpenGL、D3D11 等）特点，如 OpenGL，纯粹的状态机
+![](../assets/ue4/issue.jpg)
+- CPU 资源空闲
+- State Change 导致的 Driver Call 不断消耗 CPU 资源
+
+传统 API 对于当时硬件设计的，随着硬件的更新换代，移动端可见大量多核CPU，传统的基于单一 Context 的 API 无法利用多核 CPU 的优势。
+
+对于大型游戏来说，场景中涉及大量的渲染物体，利用好多核/多线程能够大幅度降低 CPU 单核占用（CPU Overhead），减少游戏 CPU Bound 的可能。 -->
+
+<h3 id="api-cpu">现代图形 API 专注于 CPU 资源利用率上的改进</h3>
+<p>现代图形 API 渲染流程上与基本图形管线并无二致，仍然是 RenderPass、设置 RenderState、着色器、绑定数据、调用DrawCall。</p>
+<p>现代图形 API 设计核心在于降低 CPU 开销，最大限度利用 CPU 资源（多核心），受益的应用类型为 CPU 端能够多线程并行化的应用。</p>
+<p>其中最重要的思想如下：</p>
+<blockquote>
+<ul>
+<li>更依赖于程序自身的认知，让程序有更多的权限和责任自主的处理调度和优化，而不依赖于驱动尝试在后台的优化</li>
+<li>多线程友好，让程序尽可能的利用所有CPU计算资源从而提高性能</li>
+<li>强调复用，从而减少开销</li>
+</ul>
+</blockquote>
+<p>UE4 渲染系统中大量采用现代图形 API 理念，在后一章节将会提到的 UE4 中的 CommandList、PSO、PSO Cache 等众多组件都来源于此，即 UE4 的 RHI 抽象层级更偏向现代图形 API，同时，RHI 内部完成了各类图形 API 的适配工作。</p>
+<p>我们将重点探讨 Vulkan 中的 Command Buffer、PSO，他们在其他现代图形 API 中也能找到对应概念。</p>
+<h3 id="command-buffer-commands">Command Buffer 用于记录 Commands</h3>
+<p><img alt="" src="../../assets/ue4/command-buffers.jpg" /></p>
+<ul>
+<li>Command Buffer 包含了一次 Draw 需要的所有状态（State、Binding、Draw）</li>
+</ul>
+<!-- 如下图所示，11中所有状态都是独立的，每次通过全局的Context进行设置，每次设置都会由 Driver 调用，当存在大量调用的时候，CPU 的开销较为客观。
+
+为了减小 CPU 开销，我们将状态合并为一个 PSO；而这一思路由进一步为利用CPU多核的多线程铺了路，封装为PSO后，多个线程可独立进行绘制命令调用。 -->
+
+<!-- vulkan 资源管理模式
+一次开辟大块内存，DescriptorSet 包含了绑定 Buffer 及偏移量信息
+改变一个绑定的资源需要重新创建整个Descriptor Set。但可以在大块内存分配多种资源，这样，只需修改 DescriptorSet 偏移量，达到快速绑定不同资源的目的。
+- 减少内存分配频率
+- 减少Buffer绑定频率（多个变量都存在一块Buffer中） -->
+
+<h3 id="_2">应用程序控制优化</h3>
+<p>现代图形 API 将应用同步控制权交还到开发者手上，UE4 中高层级概念 RenderGraph 为图形开发者自动计算依赖、插入 Fence。</p>
+<p>对于传统API，Command Buffer 和 Driver 概念绑定在一起，对于 D3D12，Command Buffer 独立于 Driver 层级，提供缓存命令的功能，它能够在适当的时机将缓存的命令一起发送给 GPU，缓存能减少调用 Driver 带来的 CPU 由用户态转换到内核态带来的性能开销</p>
+<p>感兴趣看[文刀秋二关于 Vulkan 理念]的文章，本节是简短转述。</p>
+<h2 id="ue4">UE4 渲染子系统设计理念</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>渲染系统代码主要放在 Source\Runtime\RenderCore、Source\Runtime\Renderer、Source\Runtime\RHI 文件夹下。</p>
+</div>
+<p>本章将讲述 UE4 渲染子系统的设计理念。其中，既包含上一章节中提到的现代图形 API 的设计，也包含了作为游戏引擎子系统需要考虑到的设计。</p>
+<p>接下来分别讲述以下几个概念</p>
+<p>首先回顾渲染的整体流程：</p>
+<ol>
+<li>首先看基本数据结构，网格体表示、视角和摄像机、材质、数据（几何数据、Uniform 和 Parameter）</li>
+<li>跟踪网格体绘制流程</li>
+<li>跟踪 Renderer</li>
+</ol>
+<p>在这些流程背后，众多基础类共同为我们提供系统基本功能。</p>
+<p>我们将剥离掉游戏引擎渲染子系统（业务逻辑）这一标签，聚焦于渲染系统在图形渲染方面设计动机：</p>
+<p>对于图形渲染最基本的是 Pipeline，粗略对应上 RenderPass 概念，Pipeline 又包含了 Shader、Binding、Vertex、Issue DrawCall 等概念。</p>
+<p>对应现代图形 API 的设计：
+1. CommandList
+2. PSO
+3. PSO Cache
+4. Render Graph 计算依赖（自主控制）</p>
+<p>渲染系统自身的设计：</p>
+<ol>
+<li>平台无关</li>
+<li>缓存</li>
+<li>Permutation</li>
+</ol>
+<h3 id="_3">流程一览</h3>
+<h4 id="_4">渲染相关类</h4>
+<p>渲染主流程概览（注：作者将整个系统代码流程扒下来，非常直观，不过同样需注意 4.22 版本重构导致的变动）<a href="https://blog.csdn.net/leonwei/article/details/84821849">UE4 Render System Sheet（UE4渲染系统概览）</a></p>
+<p><img alt="" src="../../assets/ue4/ue4-rendering-system.png" /></p>
+<h4 id="renderer">Renderer 流程</h4>
+<p><img alt="" src="../../assets/ue4/mobile-rendering.png" /></p>
+<h4 id="_5">游戏线程、渲染线程</h4>
+<p>渲染线程主要执行内容在 RenderingThreadMain 中，游戏线程借助 EQUEUE_XX_COMMNAD 系列宏，向渲染线程添加渲染任务，渲染线程不断提取任务。</p>
+<p><img alt="" src="../../assets/ue4/multi-thread.png" /></p>
+<h4 id="_6">网格体绘制流程</h4>
+<h4 id="_7">后处理流程</h4>
+<h3 id="pipeline-state-object">Pipeline State Object</h3>
+<p>包含 Pipeline 所需所有状态，与 CommandList 配合使用</p>
+<h3 id="frhicommandlist">FRHICommandList</h3>
+<p>消除上下文，每个 CommandList 包含完整的渲染所需状态</p>
+<blockquote>
+<p>RHI Command List definitions for queueing up &amp; executing later.</p>
+</blockquote>
+<h3 id="render-graph">Render Graph 资源控制</h3>
+<p>UE4 4.22 版本中添加了 Render Graph 提供了高层抽象，管理 Pass。</p>
+<p>结构化渲染流程，用来管理 Render Pass</p>
+<p>GPU Barrier：可以使用 Render Graph 这类技术来自动发现 Dependency 并且来最大化优化 Barriers</p>
+<p>其设计理念参考寒霜引擎中的 FrameGraph。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/36522188">[GDC17] FrameGraph Extensible Rendering Architecture in Frostbite</a></p>
+<p><img alt="" src="../../assets/ue4/framegraph.jpg" /></p>
+<p><a href="https://jxmaster.me/2019/07/21/designing-a-modern-graphic-api-abstract-layer/">现代化的图形渲染API抽象层的设计</a></p>
+<blockquote>
+<p>通过资源之间的依赖关系将它们组装成Task Graph。在编译Task Graph生成GPU指令的时候，系统自动添加所有必要的同步信号、临界段</p>
+</blockquote>
+<p><a href="https://www.reddit.com/r/unrealengine/comments/apw5j1/422_preview_1_now_available/">Render Graph Reddit Discuss 1</a></p>
+<blockquote>
+<p>It's a high level pipeline describing the different stages of rendering a frame. Similar to what Frostbite has in Battlefront games. Basically it should enable developers to customize rendering more easily.</p>
+</blockquote>
+<p><a href="https://www.reddit.com/r/gamedev/comments/aq8ocj/the_new_unreal_engine_422_preview_has_automatic/">Render Graph Reddit Discuss 2</a></p>
+<blockquote>
+<p>The render graph is similar to the FrameGraph in Frostbite engine, and its a way to connect different rendering passes, leaving the render-graph system to figure out the memory dependencies and the framebuffers. Once finished, it will allow for improved customization of the renderer, and even rendering plugins.</p>
+</blockquote>
+<p>为后续自定义渲染器做准备。</p>
+<h3 id="postprocessing-graph">PostProcessing Graph</h3>
+<p>Scene pass order and dependency system.</p>
+<p><a href="https://forums.unrealengine.com/unreal-engine/feedback-for-epic/22513-postprocessing-graph">Hint 2014 年提问</a></p>
+<h3 id="api">跨平台，跨 API 调用</h3>
+<p>由于UE4 渲染系统面对的是跨平台、封装多种图形 API，渲染系统层面上难以统一实现所有特性（难以将现代图形 API 特性直接赋予传统图形 API）。</p>
+<p><img alt="" src="../../assets/ue4/feature-level.png" /></p>
+<p>游戏引擎打包出的游戏应用需要在多平台（PC，移动端，PS4，Switch，XBOX）下使用。 不同平台计算能力不同，使用图形接口不同，于是分化出了 Feature Level、Renderer、RHI 等概念。</p>
+<p>Feature Level：根据图形 API 的特性分出了 SM5、SM4、ES3_1、ES_2 几种特性集合</p>
+<p>RHI：图形 API 之上的一个薄层</p>
+<p>与PC平台不同，移动平台硬件架构不同、散热要求高、运算能力低、支持图形 API 不同。</p>
+<p>RHI 让我们能写平台无关的图形渲染代码，RHI 为我们自动将其转换为特定平台特定API的代码。意味着RHI及RHI之上的渲染线程承担了这部分功能，将以上提到的多线程、复用、应用程序优化自行实现一遍。</p>
+<ul>
+<li>Feature Level 决定了使用哪种 Renderer</li>
+<li>设备显卡支持的图形 API 决定了 Feature Level</li>
+<li>高层级图形 API 可以使用低 Feature Level</li>
+</ul>
+<blockquote>
+<p>图形API是所有游戏引擎都必须打交道的部分，游戏引擎依赖平台的图形API实现游戏画面的绘制。一般来说，游戏引擎所运行的平台都会具有独立的图形处理单元（GPU）和独立的显存（VDRAM），这部分资源需要使用平台特定的API去访问。不同的平台提供不同的图形API，如Windows平台主流的图形API就包括Direct3D 11、Direct3D 12、OpenGL、Vulkan等、MacOS平台只有Metal和OpenGL两种、Linux和Android平台使用OpenGL和Vulkan、iOS平台使用OpenGL和Metal、Nintendo 3DS使用OpenGL的一个子集，而Playstation 4、Nintendo Switch等游戏主机则提供自己专有的图形API。当我们设计一款跨平台游戏引擎的时候，我们自然不希望在每个平台上都用它提供的专有API重新编写一遍图形相关的算法，因此我们会设计图形API抽象层，它提供了大部分平台均具有的图形相关功能，并且在不同的平台上映射到不同的专有API上，即使用不同的专有图形API实现。</p>
+</blockquote>
+<p><img alt="" src="../../assets/ue4/rhi.png" /></p>
+<blockquote>
+<p><a href="https://jxmaster.me/2019/07/21/designing-a-modern-graphic-api-abstract-layer/">现代化的图形渲染API抽象层的设计</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ES2</td>
+<td>Feature level defined by the core capabilities of OpenGL ES2.</td>
+</tr>
+<tr>
+<td>ES3_1</td>
+<td>Feature level defined by the core capabilities of OpenGL ES3.1 &amp; Metal/Vulkan.</td>
+</tr>
+<tr>
+<td>SM4</td>
+<td>Feature level defined by the capabilities of DX10 Shader Model 4.</td>
+</tr>
+<tr>
+<td>SM5</td>
+<td>Feature level defined by the capabilities of DX11 Shader Model 5.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The RHI's feature level indicates what level of support can be relied upon. Note: these are named after graphics API's like ES2 but a feature level can be used with a different API (eg ERHIFeatureLevel::ES2 on D3D11) As long as the graphics API supports all the features of the feature level (eg no ERHIFeatureLevel::SM5 on OpenGL ES2)
+<a href="https://api.unrealengine.com/INT/API/Runtime/RHI/ERHIFeatureLevel__Type/index.html">ERHIFeatureLevel::Type</a></p>
+</blockquote>
+<p><a href="http://aicdg.com/ue4-rhi/">unreal engine 4 图形API选择逻辑</a></p>
+<p>Q：MacOS 上使用的是 Metal API，Feature Level 为 SM5？ 什么机制决定了最终选则？</p>
+<h3 id="pass">材质、顶点、Pass 代码解耦</h3>
+<p><img alt="" src="../../assets/ue4/permutation.png" /></p>
+<p>每次在编辑器中修改、添加材质的时候，我们会看到至少上百个着色器的编译。上图解释了大量着色器的来源——Material 多种 Vertex Factory 组合，并与着色器中不同的宏定义进行组合，导致一次 Material 修改产生成大量 Shader，等待编译。</p>
+<p>我们查看 UE4 源码中的 Pass 对应的 Shader 文件，其头部包含了</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;/Engine/Generated/Material.ush&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;/Engine/Generated/VertexFactory.ush&quot;</span><span class="cp"></span>
+</pre></div>
+
+
+<p>这使得 RenderPass 相关的代码从顶点类型、材质中抽离出来。</p>
+<p>并且，Pass 的 usf 代码中包含了众多宏定义，如：</p>
+<div class="codehilite"><pre><span></span>DIRECTIONAL_LIGHT_CSM
+</pre></div>
+
+
+<p>每当有新的材质添加进游戏中时，如 BasePassPixelShader.usf 文件就需要处理 VertexFactory、RenderPass 及其中宏定义的组合，产生可用的 Shader。</p>
+<p>每新添一种材质，编辑器运行时为我们自动编译所有可能的排列（Permutaiton），FShaderCodeLibrary 为我们提供缓存功能。</p>
+<p>ShaderCache 在 4.22 中被 PSO Cache 取代。</p>
+<p>来源：<a href="https://www.unrealengine.com/zh-CN/resources">UE4 for Mobile | Developing High-end Mobile Games</a></p>
+<h3 id="pso-cache">利用 PSO Cache 改善载入时性能</h3>
+<p>PSO Cache 是 4.21 出现的，用于替代以前的 FShaderCache。</p>
+<p>实际游戏过程中，我们并不会用到着色器的所有 Permutation，只会从中挑选出一个子集，PSO Cache 正为缓存了这个子集，游戏发布时，只需将小部分的缓存打包到客户端上。</p>
+<p>PSO Cache 有效减少游戏载入阶段着色器编译的时长。</p>
+<p><img alt="" src="../../assets/ue4/PSOs.png" /></p>
+<p>例如，在移动端堡垒之夜中，28,000 个 Shader Programs 中，Profile 到其中常用 4,000 个常用项。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>移动端使用过程中会遇到 Shader 在显存中占用过大，解决方案是使用 LRU 策略。</p>
+</div>
+<h3 id="draw-command">复用 Draw Command 资源</h3>
+<p>4.22 中，渲染系统对Mesh绘制部分进行了完全的重构，重构后的流程可以缓存 DrawCommand，其次 RHI 可以根据 DrawCommand 实现 DrawCall Merge 优化。</p>
+<p><img alt="" src="../../assets/ue4/MeshPipelineOverview_3.jpg" />
+<img alt="" src="../../assets/ue4/mesh-refactor.png" /></p>
+<p><a href="https://zhuanlan.zhihu.com/p/43576669">虚幻4渲染编程(Shader篇)【第十卷：绘制策略】</a>
+<a href="https://zhuanlan.zhihu.com/p/61464613">虚幻4渲染编程(Shader篇)【第十二卷：MeshDrawPipline】</a>
+<a href="https://zhuanlan.zhihu.com/p/73580221">UE4.22渲染数据管线重构和动态instancing</a></p>
+<h2 id="_8">其他特性</h2>
+<h3 id="rhi">RHI 线程</h3>
+<p>减少渲染线程耗时</p>
+<p><img alt="" src="../../assets/ue4/rhi-thread.png" /></p>
+<h3 id="renderpass">合并 RenderPass 减少移动端开销</h3>
+<p>4.22 新特性，避免 RenderTarget 不必要的 Load-Store。
+<img alt="" src="../../assets/ue4/explicit-renderpass.png" /></p>
+<h2 id="_9">参考</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/20712354">Vulkan - 高性能渲染</a>
+<a href="https://gameinstitute.qq.com/community/detail/113040">Command Buffer，不过这篇不太好理解</a></p>
+<p><a href="https://blog.csdn.net/jxw167/article/details/81905522">D3D11,12 对比</a>
+<a href="https://docs.microsoft.com/zh-cn/windows/win32/direct3d12/design-philosophy-of-command-queues-and-command-lists">D3D12 设计理念</a></p>
+<p><a href="https://forums.unrealengine.com/international/china/116790-unreal-open-day-2017-epic-games-%E6%8A%80%E6%9C%AF%E6%BC%94%E8%AE%B2-ppt-%E5%88%86%E4%BA%AB">Unreal Open Day 技术PPT for Mobile</a></p>
+<p><a href="https://www.unrealengine.com/zh-CN/resources">UE4 资源库，含 OpenDay的资料</a></p>
+<p>....</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../paper/convention-anti-aliasing/" title="反走样算法" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                反走样算法
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../tutor/" title="虚幻引擎入门" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                虚幻引擎入门
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 lijiankuan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

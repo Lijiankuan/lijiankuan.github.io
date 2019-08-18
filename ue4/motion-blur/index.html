@@ -1,0 +1,3203 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="工作、编程记录">
+      
+      
+      
+        <meta name="author" content="李健宽">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/code.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+    
+    
+      
+        <title>移动设备运动模糊-虚幻引擎 - 李健宽——手札</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Noto Serif SC","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="amber">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#-" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="李健宽——手札" class="md-header-nav__button md-logo">
+          
+            <img src="../../assets/images/logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              李健宽——手札
+            </span>
+            <span class="md-header-nav__topic">
+              移动设备运动模糊-虚幻引擎
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="扉页" class="md-tabs__link">
+        扉页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../graphics/" title="领域" class="md-tabs__link">
+          领域
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../reading/frvsr-cvpr2018/" title="研读" class="md-tabs__link">
+          研读
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../cplusplus/inside-the-cpp-object-model/" title="基础" class="md-tabs__link">
+          基础
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../gist/docker-basic/" title="杂记" class="md-tabs__link">
+          杂记
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="李健宽——手札" class="md-nav__button md-logo">
+      
+        <img src="../../assets/images/logo.svg" width="48" height="48">
+      
+    </a>
+    李健宽——手札
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="扉页" class="md-nav__link">
+      扉页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ems-rendering/" title="图形学 | 大型场景渲染" class="md-nav__link">
+      图形学 | 大型场景渲染
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../frss/" title="深度学习 | 深度学习图形增强" class="md-nav__link">
+      深度学习 | 深度学习图形增强
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../ar/" title="AR | 联合导航" class="md-nav__link">
+      AR | 联合导航
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      领域
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        领域
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      图形学
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        图形学
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/" title="图形学 | 目录" class="md-nav__link">
+      图形学 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-2" type="checkbox" id="nav-5-1-2">
+    
+    <label class="md-nav__link" for="nav-5-1-2">
+      基本算法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-2">
+        基本算法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/cloud-rendering/" title="图形学 | 云渲染" class="md-nav__link">
+      图形学 | 云渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../graphics/shadow/" title="引擎中的阴影" class="md-nav__link">
+      引擎中的阴影
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-3" type="checkbox" id="nav-5-1-3">
+    
+    <label class="md-nav__link" for="nav-5-1-3">
+      混合渲染
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-3">
+        混合渲染
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/" title="混合渲染" class="md-nav__link">
+      混合渲染
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/directml/" title="DirectML 指南" class="md-nav__link">
+      DirectML 指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/architect/" title="DirectML 工作流" class="md-nav__link">
+      DirectML 工作流
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/binding/" title="资源绑定" class="md-nav__link">
+      资源绑定
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../directx/project/" title="项目编码相关" class="md-nav__link">
+      项目编码相关
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1-4" type="checkbox" id="nav-5-1-4">
+    
+    <label class="md-nav__link" for="nav-5-1-4">
+      图形增强项目
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-4">
+        图形增强项目
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/" title="进度管理" class="md-nav__link">
+      进度管理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/experiment/" title="实验结果" class="md-nav__link">
+      实验结果
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/data/" title="数据采集" class="md-nav__link">
+      数据采集
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/dataset/" title="数据集规格" class="md-nav__link">
+      数据集规格
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/related-work/" title="相关工作" class="md-nav__link">
+      相关工作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/convention-anti-aliasing/" title="反走样算法" class="md-nav__link">
+      反走样算法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2" checked>
+    
+    <label class="md-nav__link" for="nav-5-2">
+      虚幻引擎
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        虚幻引擎
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../final-chapter1/" title="UE4 渲染系统设计浅析 - 4.22 Release" class="md-nav__link">
+      UE4 渲染系统设计浅析 - 4.22 Release
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tutor/" title="虚幻引擎入门" class="md-nav__link">
+      虚幻引擎入门
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        移动设备运动模糊-虚幻引擎
+      </label>
+    
+    <a href="./" title="移动设备运动模糊-虚幻引擎" class="md-nav__link md-nav__link--active">
+      移动设备运动模糊-虚幻引擎
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="定位修改位置" class="md-nav__link">
+    定位修改位置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shader" title="自定义 Shader 编写" class="md-nav__link">
+    自定义 Shader 编写
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="目录结构" class="md-nav__link">
+    目录结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="调试方式" class="md-nav__link">
+    调试方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="实践" class="md-nav__link">
+    实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="问题列表" class="md-nav__link">
+    问题列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolve" title="Resolve 含义" class="md-nav__link">
+    Resolve 含义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="性能" class="md-nav__link">
+    性能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profile" title="Profile 性能分析" class="md-nav__link">
+    Profile 性能分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo" title="TODO" class="md-nav__link">
+    TODO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="讨论：" class="md-nav__link">
+    讨论：
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glsl_es2-tonemapping" title="GLSL_ES2 渲染 ToneMapping 时纹理反转回来了" class="md-nav__link">
+    GLSL_ES2 渲染 ToneMapping 时纹理反转回来了
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="目前已知的需要注意的问题" class="md-nav__link">
+    目前已知的需要注意的问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msaa" title="解决方案 MSAA 无法得到深度" class="md-nav__link">
+    解决方案 MSAA 无法得到深度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glsl_es" title="GLSL_ES 兼容性" class="md-nav__link">
+    GLSL_ES 兼容性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity-buffer" title="计算 Velocity Buffer" class="md-nav__link">
+    计算 Velocity Buffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-motion-blur" title="14 Motion Blur" class="md-nav__link">
+    14 Motion Blur
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" title="导师 Tips" class="md-nav__link">
+    导师 Tips
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="深度获取" class="md-nav__link">
+    深度获取
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" title="参考资料" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tile-based-rendering/" title="TBR" class="md-nav__link">
+      TBR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4-note/" title="UE4 笔记" class="md-nav__link">
+      UE4 笔记
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4-tutor/" title="UE4 赛车 Demo" class="md-nav__link">
+      UE4 赛车 Demo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ue4/" title="组内 UE4 安装" class="md-nav__link">
+      组内 UE4 安装
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blueprint/" title="蓝图 基础概念" class="md-nav__link">
+      蓝图 基础概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../coordinate/" title="UE4 中如何处理 D3D 和 OpenGL 坐标系" class="md-nav__link">
+      UE4 中如何处理 D3D 和 OpenGL 坐标系
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mesh/" title="Mesh 绘制" class="md-nav__link">
+      Mesh 绘制
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rendering/" title="引擎渲染模块（移动端）虚幻 4.22.2" class="md-nav__link">
+      引擎渲染模块（移动端）虚幻 4.22.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader/" title="Shader 编写指南" class="md-nav__link">
+      Shader 编写指南
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sota-motion-blur/" title="引擎中的 Motion Blur" class="md-nav__link">
+      引擎中的 Motion Blur
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vertex-rendering/" title="网格体绘制中的属性" class="md-nav__link">
+      网格体绘制中的属性
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sk_mesh_render/" title="虚幻引擎的渲染管线" class="md-nav__link">
+      虚幻引擎的渲染管线
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../code-review/" title="UE4 运动模糊代码解读" class="md-nav__link">
+      UE4 运动模糊代码解读
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      深度学习
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        深度学习
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/" title="深度学习 | 目录" class="md-nav__link">
+      深度学习 | 目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3-2" type="checkbox" id="nav-5-3-2">
+    
+    <label class="md-nav__link" for="nav-5-3-2">
+      TensorRT
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-3-2">
+        TensorRT
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/" title="TensorRT 安装说明" class="md-nav__link">
+      TensorRT 安装说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project/" title="测试" class="md-nav__link">
+      测试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/project-workflow/" title="项目代码流程" class="md-nav__link">
+      项目代码流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trt-int8/" title="TensorRT INT8" class="md-nav__link">
+      TensorRT INT8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tensorrt/trtexec/" title="trtexec 源码分析" class="md-nav__link">
+      trtexec 源码分析
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/recurrent/" title="序列建模：循环和递归神经网络" class="md-nav__link">
+      序列建模：循环和递归神经网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../deep-learning/u-net/" title="U-net" class="md-nav__link">
+      U-net
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sr/" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      机器视觉
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        机器视觉
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/" title="目录" class="md-nav__link">
+      目录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/reference/" title="资料" class="md-nav__link">
+      资料
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/state-estimation/" title="《机器人学中的状态估计》" class="md-nav__link">
+      《机器人学中的状态估计》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/category/" title="SLAM 类别" class="md-nav__link">
+      SLAM 类别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/fej/" title="FEJ" class="md-nav__link">
+      FEJ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/margin/" title="边缘化" class="md-nav__link">
+      边缘化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slam/filter-optimization/" title="滤波和优化" class="md-nav__link">
+      滤波和优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      研读
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        研读
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/frvsr-cvpr2018/" title="Frame-Recurrent Video Super-Resolution" class="md-nav__link">
+      Frame-Recurrent Video Super-Resolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dacs_hpg2018/" title="Deferred Adaptive Compute Shading" class="md-nav__link">
+      Deferred Adaptive Compute Shading
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/cpst-siggraph2018/" title="Coarse Pixel Shading with Temporal Supersampling" class="md-nav__link">
+      Coarse Pixel Shading with Temporal Supersampling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/preintegration/" title="机器视觉 | 预积分" class="md-nav__link">
+      机器视觉 | 预积分
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/vins-ismar2017/" title="机器视觉 | VIO-HKUST" class="md-nav__link">
+      机器视觉 | VIO-HKUST
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/msckf/" title="机器视觉 | MSCKF" class="md-nav__link">
+      机器视觉 | MSCKF
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/okvis-ijrr2015/" title="机器视觉 | OKVIS" class="md-nav__link">
+      机器视觉 | OKVIS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/orbslam2-/" title="机器视觉 | ORB-SLAM2" class="md-nav__link">
+      机器视觉 | ORB-SLAM2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/ptam/" title="机器视觉 | PTAM" class="md-nav__link">
+      机器视觉 | PTAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/svo/" title="机器视觉 | SVO" class="md-nav__link">
+      机器视觉 | SVO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/lsd/" title="机器视觉 | LSD" class="md-nav__link">
+      机器视觉 | LSD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/dso/" title="机器视觉 | DSO" class="md-nav__link">
+      机器视觉 | DSO
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/psas-slam/" title="机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)" class="md-nav__link">
+      机器视觉 | Probabilistic Data Association for Semantic SLAM(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/semantic-fusion/" title="机器视觉 | SemanticFusion(TODO)" class="md-nav__link">
+      机器视觉 | SemanticFusion(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/slam++/" title="机器视觉 | SLAM++(TODO)" class="md-nav__link">
+      机器视觉 | SLAM++(TODO)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reading/motionblur2014/" title="A Fast and Stable Feature-Aware Motion Blur Filter" class="md-nav__link">
+      A Fast and Stable Feature-Aware Motion Blur Filter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      基础
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        基础
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/inside-the-cpp-object-model/" title="《深入探索 C++ 对象模型》" class="md-nav__link">
+      《深入探索 C++ 对象模型》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/effective-c++/" title="《Effective C++》" class="md-nav__link">
+      《Effective C++》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/stl/" title="《STL 源码剖析》" class="md-nav__link">
+      《STL 源码剖析》
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/factory/" title="工厂模式" class="md-nav__link">
+      工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/move-semantics/" title="移动语义" class="md-nav__link">
+      移动语义
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/forward/" title="完美转发" class="md-nav__link">
+      完美转发
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/enum-class/" title="枚举类" class="md-nav__link">
+      枚举类
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../cplusplus/design-pattern/" title="观察者模式" class="md-nav__link">
+      观察者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      杂记
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        杂记
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/docker-basic/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/algorithm/" title="算法、数据结构训练" class="md-nav__link">
+      算法、数据结构训练
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/desktop-repair/" title="重装 Ubuntu 18.04 Gnome Desktop" class="md-nav__link">
+      重装 Ubuntu 18.04 Gnome Desktop
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/github-proxy/" title="Github Proxy Configuration" class="md-nav__link">
+      Github Proxy Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/gtest-install/" title="Google Test Installation" class="md-nav__link">
+      Google Test Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/numpy-ref/" title="numpy 中文文档" class="md-nav__link">
+      numpy 中文文档
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/pip-source/" title="pip 源切为国内镜像" class="md-nav__link">
+      pip 源切为国内镜像
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/shadowsocks/" title="Ubuntu-18.04 Shadowsocks配置" class="md-nav__link">
+      Ubuntu-18.04 Shadowsocks配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-rename/" title="Ubuntu 批量重命名" class="md-nav__link">
+      Ubuntu 批量重命名
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/usb-mount/" title="Ubuntu18.04 存储设备挂载" class="md-nav__link">
+      Ubuntu18.04 存储设备挂载
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/vscode-pytorch/" title="vscode torch 标红" class="md-nav__link">
+      vscode torch 标红
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/wifi-connection/" title="Console Wi-Fi Connection in Ubuntu 18.04" class="md-nav__link">
+      Console Wi-Fi Connection in Ubuntu 18.04
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/cloud-rendering/" title="Cloud Rendering" class="md-nav__link">
+      Cloud Rendering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/ubuntu-theme/" title="Ubuntu 18.04 Theme" class="md-nav__link">
+      Ubuntu 18.04 Theme
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/mkdocs-ch-support/" title="Mkdocs 中文支持" class="md-nav__link">
+      Mkdocs 中文支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../paper/introduction/" title="论文写作" class="md-nav__link">
+      论文写作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hybrid-rendering/pfm-cpp/" title="PFM 图片读写" class="md-nav__link">
+      PFM 图片读写
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../github-project-boards/" title="组内开发说明" class="md-nav__link">
+      组内开发说明
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-branch-name/" title="Git 分支命名规范" class="md-nav__link">
+      Git 分支命名规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/git-commit-log/" title="Git Commit Log 规范" class="md-nav__link">
+      Git Commit Log 规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/review/" title="论文 review" class="md-nav__link">
+      论文 review
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/slam-jd/" title="机器视觉笔试、面试" class="md-nav__link">
+      机器视觉笔试、面试
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gist/method/" title="结构化思维" class="md-nav__link">
+      结构化思维
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="定位修改位置" class="md-nav__link">
+    定位修改位置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shader" title="自定义 Shader 编写" class="md-nav__link">
+    自定义 Shader 编写
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="目录结构" class="md-nav__link">
+    目录结构
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="调试方式" class="md-nav__link">
+    调试方式
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="实践" class="md-nav__link">
+    实践
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="问题列表" class="md-nav__link">
+    问题列表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolve" title="Resolve 含义" class="md-nav__link">
+    Resolve 含义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="性能" class="md-nav__link">
+    性能
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profile" title="Profile 性能分析" class="md-nav__link">
+    Profile 性能分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo" title="TODO" class="md-nav__link">
+    TODO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="讨论：" class="md-nav__link">
+    讨论：
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glsl_es2-tonemapping" title="GLSL_ES2 渲染 ToneMapping 时纹理反转回来了" class="md-nav__link">
+    GLSL_ES2 渲染 ToneMapping 时纹理反转回来了
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="目前已知的需要注意的问题" class="md-nav__link">
+    目前已知的需要注意的问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#msaa" title="解决方案 MSAA 无法得到深度" class="md-nav__link">
+    解决方案 MSAA 无法得到深度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glsl_es" title="GLSL_ES 兼容性" class="md-nav__link">
+    GLSL_ES 兼容性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity-buffer" title="计算 Velocity Buffer" class="md-nav__link">
+    计算 Velocity Buffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-motion-blur" title="14 Motion Blur" class="md-nav__link">
+    14 Motion Blur
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" title="导师 Tips" class="md-nav__link">
+    导师 Tips
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="深度获取" class="md-nav__link">
+    深度获取
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" title="参考资料" class="md-nav__link">
+    参考资料
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="-">移动设备运动模糊-虚幻引擎</h1>
+<h2 id="_1">定位修改位置</h2>
+<div class="codehilite"><pre><span></span>MobileShadingRenderer.cpp 中 “FMobileSceneRenderer::Render”
+</pre></div>
+
+
+<h2 id="shader">自定义 Shader 编写</h2>
+<p><a href="https://www.unrealengine.com/zh-CN/tech-blog/how-to-add-global-shaders-to-ue4?lang=zh-CN">如何为 UE4 添加全局着色器</a></p>
+<ol>
+<li>Shader 对应的 .cpp 继承 FGlobalShader 类</li>
+<li>将该 Shader Type 注册到 UE4 的列表</li>
+<li>继承 TRenderingCompositePassBase，覆写 Process<ul>
+<li>组合 Shader</li>
+<li>设置 State</li>
+<li>绘制</li>
+</ul>
+</li>
+</ol>
+<h2 id="_2">目录结构</h2>
+<ul>
+<li>Source/Runtime/Renderer/Private/PostProcess 存放 Passes<ul>
+<li>PostProcessing.cpp FPostProcessing::ProcessES2 安卓设备渲染调用</li>
+<li>PostProcessMobile.cpp 含多个继承 TRenderingCompositePassBase 的类（ProcessES2 中使用）</li>
+<li>PostProcessMotionBlur.cpp 原运动模糊实现</li>
+</ul>
+</li>
+<li>Source/Runtime/Renderer/Private/ 存放主渲染 Pipeline<ul>
+<li>DeferredShadingRenderer.cpp（PC 端渲染入口）</li>
+<li>MobileShadingRenderer.cpp （移动端渲染入口 FMobileSceneRenderer::Render 中调用 FPostProcessing::ProcessES2）</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">调试方式</h2>
+<p><a href="https://docs.unrealengine.com/zh-CN/Programming/Rendering/ShaderDevelopment/index.html">着色器开发 | 虚幻引擎文档</a></p>
+<ul>
+<li>r.ShaderDevelopmentMode 设置为 1</li>
+<li>ctrl+shift+. 重新编译着色器</li>
+</ul>
+<h2 id="_4">实践</h2>
+<ol>
+<li>Source/Runtime/Renderer/Private/PostProcess/MobilePostProcessMotionBlur.h .cpp 实现新 Pass，并覆写 Process</li>
+<li>参考 PostProcessing.cpp line-1693 MotionBlur 如何将 Pass 放进 ::Process 中（Mobile 端是 ProcessES2），FPostProcessing::Process 后续被 ::Render 调用<ul>
+<li>创建 FRenderCompositePass * 变量</li>
+<li>FinalOutput = FRenderCompositeOutputRef(Pass)</li>
+<li>使用本<a href="https://zhuanlan.zhihu.com/p/37128421">教程</a>，将 RenderMyPass 添加到 RenderFog 之后，运行到 checkSlow(RHICmdList.IsOutsideRenderPass()) 抛出异常<ul>
+<li>引起原因：未查明</li>
+<li>解决方案：SceneContext.BeginRenderingSceneColor 后未调用 SceneContext.FinishRenderingSceneColor</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基础版本完成，我们能加入自行编写的全局着色器了</li>
+<li>查找运动模糊在 ES2 中加入位置<ul>
+<li>usf 在 PostProcess 目录下</li>
+</ul>
+</li>
+<li>SceneView.h 中定义了众多坐标转换工具，使用 ClipToPrevClip 计算当像素在上一帧的位置</li>
+<li>实现 GPU Gem 3 Motion Blur </li>
+<li>利用引擎 Stencil 功能添加 Mask<ul>
+<li><img alt="" src="../../assets/images/motion-base.gif" /></li>
+</ul>
+</li>
+<li>将 Sample 数量设置为参数</li>
+<li>找出编辑器不正确表现的原因：ToneMapping 后纹理大小与实际输出大小不一致<ul>
+<li><img alt="" src="../../assets/images/ue4-texture.png" /></li>
+</ul>
+</li>
+<li>
+<p>运动向量可视化</p>
+</li>
+<li>
+<p>安卓设备调试</p>
+<ul>
+<li>关闭 MSAA，获取深度</li>
+</ul>
+</li>
+<li>
+<p>修复安卓图形 API 兼容性(TODO)</p>
+<ul>
+<li>注意运动向量的计算</li>
+</ul>
+</li>
+<li>
+<p>程序稳定性(TODO)</p>
+<ul>
+<li>图形 API 坐标系</li>
+<li>能否获取正确的深度材质（至少16位浮点数）</li>
+<li>能否获取正确的 Mask</li>
+</ul>
+</li>
+<li>
+<p>性能测试    </p>
+<ul>
+<li><img alt="" src="../../assets/images/motion-performance.png" /></li>
+</ul>
+</li>
+<li>
+<p>添加项</p>
+<ul>
+<li>加一个 Pass 导出 Color.a<ul>
+<li>直接在 PostProcessing 里添加</li>
+</ul>
+</li>
+<li>
+<p>直接计算 Velocity</p>
+<ul>
+<li>测试性能</li>
+<li>RenderDoc 阴影渲染中有一个 PerObject Rendering，渲染场景中的动态物体，Velocity 中需要挑选出动态物体</li>
+<li>
+<p>Plan：挑选动态物体，使用 Velocity Rendering 渲染到纹理上，参阅网格体绘制官方文档</p>
+</li>
+<li>
+<p>MotionBlur 前渲染 RG16F 的 Velocity</p>
+<ul>
+<li>RenderVelocities 添加到 Mobile</li>
+<li>PC ClearRenderTarget，后续没了，原因：没有 Register Velocity 到 Mobile </li>
+<li>移动端 gl_clear 后未绘制，原因：AddMesh 对纹理格式进行判断，失败后，未添加 Mesh</li>
+<li>完成此步骤</li>
+</ul>
+</li>
+<li>
+<p>速度重建滤波  </p>
+<ul>
+<li>计算全屏 Velocity<ul>
+<li>算错了，previous 计算错误 </li>
+<li>E:\UnrealEngine\Engine\Source\Runtime\Renderer\Private\VelocityRendering.cpp，GPUSkinCachePreviousPositionBuffer</li>
+<li>bool SupportsVelocity() const</li>
+<li>E:\UnrealEngine\Engine\Source\Runtime\Engine\Private\GPUSkinCache.cpp</li>
+</ul>
+</li>
+<li>重写 VelocityFlatten</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>梳理 </p>
+<ul>
+<li>
+<p>收尾工作</p>
+<ul>
+<li>MSAA 开启后，使用 FrameBufferFetch 获取深度</li>
+<li>
+<p>修复 StaticMesh 速度计算错误问题：RenderDoc 的问题，截取后 View PrevView 完全一样，未找到原因 不用 RenderDoc 抓取就没问题</p>
+</li>
+<li>
+<p>效率优化</p>
+</li>
+<li>
+<p>Decal 能获取正确的深度</p>
+<ul>
+<li>Lookupdevicez SceneTexturesCommon.ush</li>
+<li>
+<p>因为用了 FrameBufferFetch</p>
+</li>
+<li>
+<p>ES2 若支持 fetch 就 fetch，否则使用 SceneDepthTexture</p>
+</li>
+<li>
+<p>ES31 使用 depth fetch，否则 framebufferfetch color.a</p>
+</li>
+<li>
+<p>跟踪 SceneDepthTexture 如何与 Surface 关联上的</p>
+<ul>
+<li>Surface 是 target</li>
+<li>texture 是 texture</li>
+<li>一种东西的两种叫法？</li>
+<li>关闭 MSAA 确实绑定了 Depth Texture</li>
+<li>开启 MSAA，绑定了一张无效的 Texture 上<ul>
+<li>Render 到了 renderbuffer，是否和 renderbuffer 只写有关</li>
+</ul>
+</li>
+<li><img alt="" src="../../assets/images/msaa-depth-texture.png" /></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>切换 Render Target 能 Resolve ？ 实际只有 Color Resolve</p>
+<blockquote>
+<p>Multisampling Considerations
+Multisampling is supported with the Default Framebuffer (through WGL/GLX_multisample) and/or Framebuffer Objects (through multisampled renderbuffers or textures, where supported).
+As explained in the article on Multisampling, a multisampled buffer must be resolved into a single sample before it can be displayed. When the default framebuffer uses multisampling, this resolving operation is automatic, occurring during framebuffer swapping (though reading from the framebuffer can cause it to happen anyway).</p>
+</blockquote>
+<p>https://community.khronos.org/t/fbo-renderbuffer-vs-texture/65933</p>
+<blockquote>
+<p>RBOs are like a texture with a hint - that you won’t expect some functionality from them. The driver can speedup rendering to them. Yet, on most modern cards, the performance difference is almost zero. Only on mobile hardware they can make any difference, to save battery - if the driver detects you’re properly using glClear on frame-start.
+Basically use RBs only if you know you’ll never need the data to be used as a texture.</p>
+</blockquote>
+<p>https://stackoverflow.com/questions/17699087/multisampling-on-ios-cant-get-depth-texture
+苹果上只 Resolve Color</p>
+<ol>
+<li>
+<p>结束</p>
+<ul>
+<li>查看 Deferred Motion Blur 参数，为 Gem 3 提供思路</li>
+</ul>
+</li>
+<li>
+<p>移植</p>
+<ul>
+<li>Unity Github 开源版本<ul>
+<li>效果一般般</li>
+<li><img alt="" src="../../assets/images/kinomotion-unity.png" /></li>
+</ul>
+</li>
+<li>14年<ul>
+<li>当前先采取两个样本方向</li>
+<li>可是采样实际速度发现，实际速度远大于MaxTile？？？？</li>
+<li>看起来只有8个样本点，一边四个</li>
+</ul>
+</li>
+<li>
+<p>完成几个场景对比，证明14Paper解决的问题</p>
+<ul>
+<li>车轮对比 ok</li>
+<li><img alt="" src="../../assets/images/single-vs-bis_1.png" /></li>
+<li>缩进对比 ok</li>
+<li><img alt="" src="../../assets/images/single-vs-bis_2.png" /></li>
+<li><img alt="" src="../../assets/images/single-vs-bis_3.png" /></li>
+</ul>
+</li>
+<li>
+<p>原始颜色权重大：被抛弃的颜色过多导致</p>
+<ul>
+<li>wa 计算结果导致大量样本点权重为0，修复权重计算过程中的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="_5">问题列表</h4>
+<table>
+<thead>
+<tr>
+<th>List</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RenderVelocities</td>
+<td>MSAA 情况下无法 Fetch 深度</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>TODO</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gem 3 可用版本</td>
+<td>关于 Stencil 的用法，决定；Max Velocity 的限制</td>
+</tr>
+<tr>
+<td>Deferred 可用版本</td>
+<td>检查 Velocity Depth Buffer 绑定，FullScreen 能否被优化掉</td>
+</tr>
+<tr>
+<td>径向动态模糊</td>
+<td>-</td>
+</tr>
+<tr>
+<td>查看动态模糊已有参数</td>
+<td>-</td>
+</tr>
+<tr>
+<td>完成一个 Demo</td>
+<td>用于展示完成的工作</td>
+</tr>
+</tbody>
+</table>
+<h4 id="resolve">Resolve 含义</h4>
+<ol>
+<li>MS-&gt;1S</li>
+<li>移动端片上内存内容写回</li>
+</ol>
+<h4 id="_6">性能</h4>
+<ul>
+<li>测试环境：小米6</li>
+<li>分辨率：720p</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Motion Blur（GPU Gem 3，采样8bitColor，Stencil 1spp）</th>
+<th>1spp</th>
+<th>5spp</th>
+<th>10spp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.6ms</td>
+<td>1.3ms</td>
+<td>2.1ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Motion Blur（GPU Gem 3，采样8bitColor，Stencil 1spp）</th>
+<th>4spp</th>
+<th>6spp</th>
+<th>8spp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>1.8ms</td>
+<td>2.3ms</td>
+<td>2.8ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Motion Blur（GPU Gem 3，采样8bitColor，Stencil 1spp）</th>
+<th>1spp</th>
+<th>4spp</th>
+<th>6spp</th>
+<th>8spp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.9ms</td>
+<td>1.4ms</td>
+<td>1.8ms</td>
+<td>2.0ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Motion Blur（GPU Gem 3，采样8bitColor，Stencil 1spp）</th>
+<th>1spp</th>
+<th>4spp</th>
+<th>6spp</th>
+<th>8spp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.6ms/1.1ms？</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Color.a to Depth</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.6ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Custom Depth（仅载具 ~10w Vertex）</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.3ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Render Velocities（仅载具 ~10w Vertex）</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.6ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Flatten Velocity 4 Pass Downsample</th>
+<th>16x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.8ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Scatter Velocity</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>0.25ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Full Screen Velocity</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>1.3ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Motion Blur（Deferred 中的，放在 Tone mapping 之后）</th>
+<th>16spp</th>
+<th>8spp</th>
+<th>6spp</th>
+<th>4spp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>10.4 ms</td>
+<td>4.7ms</td>
+<td>3.4ms</td>
+<td>2.5ms</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Pass</th>
+<th>Gem 3</th>
+<th>Deferred</th>
+<th>时间（720P）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mesh Draw</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Custom Depth</td>
+<td>✔</td>
+<td></td>
+<td>0.3ms</td>
+</tr>
+<tr>
+<td>Render Velocity</td>
+<td></td>
+<td>✔</td>
+<td>0.6ms</td>
+</tr>
+<tr>
+<td>PostProcessing</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Copy Depth</td>
+<td>✔</td>
+<td></td>
+<td>0.6ms</td>
+</tr>
+<tr>
+<td>Full Screen Velocity</td>
+<td></td>
+<td>✔</td>
+<td>1.3ms</td>
+</tr>
+<tr>
+<td>MaxTile/Flatten</td>
+<td></td>
+<td>✔</td>
+<td>0.8ms</td>
+</tr>
+<tr>
+<td>NeighborMax</td>
+<td></td>
+<td>✔</td>
+<td>0.3ms</td>
+</tr>
+<tr>
+<td>Motion Blur Deferred</td>
+<td></td>
+<td>✔</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Motion Blur Gem 3</td>
+<td>✔</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Totoal 4spp</td>
+<td>2.7ms</td>
+<td>5.5ms</td>
+<td></td>
+</tr>
+<tr>
+<td>Totoal 6spp</td>
+<td>3.3ms</td>
+<td>6.4ms</td>
+<td></td>
+</tr>
+<tr>
+<td>Totoal 8spp</td>
+<td>3.7ms</td>
+<td>7.7ms</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="profile">Profile 性能分析</h4>
+<p>RenderDoc 每次 Profile 时间差异较大
+motion-blur-profile.png</p>
+<h4 id="todo">TODO</h4>
+<p>方案1：
+RenderVelocity（载具）-&gt;RenderVelocity（全屏+Depth）-&gt;Gather</p>
+<h3 id="_7">讨论：</h3>
+<ul>
+<li>
+<p>输入输出讨论</p>
+<ul>
+<li>Input Color RGB、A 为深度</li>
+<li>采样、加权混合</li>
+</ul>
+</li>
+<li>
+<p>位置讨论 ::Process</p>
+<ul>
+<li>ToneMapping 之后（采样带宽最小）</li>
+</ul>
+</li>
+<li>
+<p>关于深度</p>
+<ul>
+<li>Color.a 全黑</li>
+<li>LookupDevicZ 用到的是 ？</li>
+<li>Android ES2 底层用到的是 OpenGL API？</li>
+</ul>
+</li>
+<li>
+<p>关于预览渲染级别</p>
+<ul>
+<li>SM5、SM4、IOS、Android ES2、HTML5 和底层使用的 API（D3D、Vulkan、OpenGL）有什么关联？</li>
+<li><a href="https://api.unrealengine.com/INT/API/Runtime/RHI/ERHIFeatureLevel__Type/index.html">图形 API 定义了自己的 Capability </a>，可以在 D3D 上使用 ES2 级别特性</li>
+<li>定义 Feature Level 只是让 Shader 走另一套</li>
+</ul>
+</li>
+<li>
+<p>坐标系</p>
+<ul>
+<li><a href="https://docs.unrealengine.com/zh-CN/Engine/Basics/CoordinateSpace/index.html">UE4 坐标空间术语</a></li>
+<li><a href="https://learnopengl-cn.readthedocs.io/zh/latest/04%20Advanced%20OpenGL/01%20Depth%20testing/">OpenGL 深度测试</a></li>
+<li><a href="http://www.songho.ca/opengl/gl_projectionmatrix.html">OpenGL NDC变换</a></li>
+</ul>
+</li>
+<li>
+<p>转换为世界坐标</p>
+<ul>
+<li>当前已有 Z/W，利用 InvWVProjection + WVP 投射回上一帧</li>
+<li>回算出 World 坐标</li>
+</ul>
+</li>
+<li>
+<p>获取变换矩阵</p>
+<ul>
+<li>ShaderCompiler.cpp line-2675 GenerateInstacedStereoCode </li>
+<li>MobileBasePassVertexShader.usf line-72 TranslatedWorldToClip</li>
+<li>SceneView.cpp line-2221<ul>
+<li>TranslatedWorldToClip</li>
+<li>ClipToTranslatedWorld</li>
+<li>line-247 Z=0 远平面/ Z=1 近平面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>GenerateInstacedStereoCode 哇，自动生成 Shader 代码</p>
+</li>
+<li>
+<p>Fatal Error: Shaders Expected a uniform buffer of struct type</p>
+<ul>
+<li>方法：跟踪 Sunmask 参数 Bind 过程</li>
+<li>现象：每次需要改动一次 Shader 后才能启动游戏</li>
+<li>原因找到：序列化不正确</li>
+<li>根据 Sunmask 修改 Serialize 函数</li>
+<li>Shader 载入正常</li>
+</ul>
+</li>
+<li>
+<p>性能问题</p>
+<ul>
+<li>Post Process 和 Framebuffer Fetch 无关</li>
+</ul>
+</li>
+<li>
+<p>查下 UV 和 NDC 坐标的关系</p>
+<ul>
+<li>OpenGL UV XY 朝向一致</li>
+<li>D3D 不一致</li>
+</ul>
+</li>
+<li>
+<p>关于编辑器中采样不正确</p>
+<ul>
+<li>编辑器初始纹理创建 1920x1040</li>
+<li>采样超出边界时，得到黑色像素</li>
+<li>后处理画的是三角形，RenderDoc 查看，利用了 GPU 光栅化的剔除功能</li>
+<li>UV 非全部覆盖屏幕的四边形，只覆盖了一部分，导致运动向量不正确</li>
+<li>关键在于 DrawRect .cpp 文件里的控制参数</li>
+</ul>
+</li>
+<li>
+<p>采样的问题</p>
+<ul>
+<li>1 Sample Point，却有2种颜色？</li>
+<li>编辑器里没问题，播放都有问题</li>
+<li>PostProcessAA 的问题，太恐怖了这效果</li>
+<li><img alt="" src="../../assets/images/ue4-mobile-aa.png" /></li>
+</ul>
+</li>
+<li>
+<p>DrawRectangle 分析</p>
+<ul>
+<li>InPosition 是个三角形，实际上需要借助 GPU 进行裁剪，我们仅使用三角形中截取的正方形区域，该区域 InPosition 范围为 [0, 1]。</li>
+<li>X，Y 为 Target 上的偏移量</li>
+<li>SizeX，SizeY 理解绘制区域大小</li>
+<li>
+<p>PosScaleBias 合起来理解为在 Target 上渲染的长方形位置、大小</p>
+</li>
+<li>
+<p>U，V 为 Texture 上的偏移量</p>
+</li>
+<li>SizeU，SizeV 为 Texel 数量</li>
+<li>UVScaleBias 合起来为 Texture 上的偏移量和大小</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span>    <span class="c1">// SceneFilterRendering.cpp</span>
+
+    <span class="c1">// Set up vertex uniform parameters for scaling and biasing the rectangle.</span>
+    <span class="c1">// Note: Use DrawRectangle in the vertex shader to calculate the correct vertex position and uv.</span>
+
+    <span class="n">FDrawRectangleParameters</span> <span class="n">Parameters</span><span class="p">;</span>
+    <span class="n">Parameters</span><span class="p">.</span><span class="n">PosScaleBias</span> <span class="o">=</span> <span class="n">FVector4</span><span class="p">(</span><span class="n">SizeX</span><span class="p">,</span> <span class="n">SizeY</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">);</span>
+    <span class="n">Parameters</span><span class="p">.</span><span class="n">UVScaleBias</span> <span class="o">=</span> <span class="n">FVector4</span><span class="p">(</span><span class="n">SizeU</span><span class="p">,</span> <span class="n">SizeV</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">);</span>
+
+    <span class="n">Parameters</span><span class="p">.</span><span class="n">InvTargetSizeAndTextureSize</span> <span class="o">=</span> <span class="n">FVector4</span><span class="p">(</span>
+        <span class="mf">1.0f</span> <span class="o">/</span> <span class="n">TargetSize</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="n">TargetSize</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span>
+        <span class="mf">1.0f</span> <span class="o">/</span> <span class="n">TextureSize</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="n">TextureSize</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span>
+
+
+    <span class="c1">// Common.ush</span>
+
+    <span class="cm">/** Used for calculating vertex positions and UVs when drawing with DrawRectangle */</span>
+    <span class="kt">void</span> <span class="nf">DrawRectangle</span><span class="p">(</span> <span class="n">in</span> <span class="n">float4</span> <span class="n">InPosition</span><span class="p">,</span> <span class="n">in</span> <span class="n">float2</span> <span class="n">InTexCoord</span><span class="p">,</span> <span class="n">out</span> <span class="n">float4</span> <span class="n">OutPosition</span><span class="p">,</span> <span class="n">out</span> <span class="n">float2</span> <span class="n">OutTexCoord</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">OutPosition</span> <span class="o">=</span> <span class="n">InPosition</span><span class="p">;</span>
+        <span class="n">OutPosition</span><span class="p">.</span><span class="n">xy</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0f</span> <span class="o">+</span> <span class="mf">2.0f</span> <span class="o">*</span> <span class="p">(</span><span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">PosScaleBias</span><span class="p">.</span><span class="n">zw</span> <span class="o">+</span> <span class="p">(</span><span class="n">InPosition</span><span class="p">.</span><span class="n">xy</span> <span class="o">*</span> <span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">PosScaleBias</span><span class="p">.</span><span class="n">xy</span><span class="p">))</span> <span class="o">*</span> <span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">InvTargetSizeAndTextureSize</span><span class="p">.</span><span class="n">xy</span><span class="p">;</span>
+        <span class="n">OutPosition</span><span class="p">.</span><span class="n">xy</span> <span class="o">*=</span> <span class="n">float2</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">);</span>
+        <span class="n">OutTexCoord</span><span class="p">.</span><span class="n">xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">UVScaleBias</span><span class="p">.</span><span class="n">zw</span> <span class="o">+</span> <span class="p">(</span><span class="n">InTexCoord</span><span class="p">.</span><span class="n">xy</span> <span class="o">*</span> <span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">UVScaleBias</span><span class="p">.</span><span class="n">xy</span><span class="p">))</span> <span class="o">*</span> <span class="n">DrawRectangleParameters</span><span class="p">.</span><span class="n">InvTargetSizeAndTextureSize</span><span class="p">.</span><span class="n">zw</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>采样流程</p>
+<ul>
+<li>Position </li>
+<li>采样使用 ToneMapping UV（和 Position 一致）</li>
+</ul>
+</li>
+<li>
+<p>UE4-安卓调试配置</p>
+<ul>
+<li>安装 <a href="https://docs.unrealengine.com/zh-CN/Platforms/Mobile/Android/InstallingAndroidCodeWorksAndroid/index.html">Codeworks for Android</a></li>
+<li><a href="https://docs.unrealengine.com/zh-CN/Platforms/Mobile/Android/GettingStarted/index.html">游戏项目设置</a></li>
+</ul>
+</li>
+<li>
+<p>打包失败</p>
+<ul>
+<li>[INSTALL_FAILED_USER_RESTRICTED: Install canceled by user]</li>
+<li><a href="https://stackoverflow.com/questions/37641670/adb-install-failure-install-canceled-by-user">允许 App 通过 USB 安装</a></li>
+</ul>
+</li>
+<li>
+<p>性能分析</p>
+<ul>
+<li><a href="https://www.cnblogs.com/ghl_carmack/p/5481763.html">UE4 性能优化方法(工具篇)</a></li>
+<li>移动端 GPU 分析<ul>
+<li>adreno profiler</li>
+<li>NVIDIA Tegra Graphics Debugger</li>
+<li>ImgTec PVRTune and PVRTrace</li>
+<li>ARM Mali Graphics Debugger</li>
+<li>RenderDoc</li>
+</ul>
+</li>
+<li><a href="https://api.unrealengine.com/udk/Three/MobileGPUProfilingCH.html">靠目测 stat unit</a></li>
+<li>上边都是错的，直接用 RenderDoc，自带时间分析</li>
+<li>小米 6，RenderDoc 测试 10 样本 2.5 ms</li>
+</ul>
+</li>
+<li>
+<p>GLSL-ES2 Motion 表现不正确</p>
+<ul>
+<li><img alt="" src="../../assets/images/mobile-motion-error.png" /></li>
+<li>关闭 MSAA 即可，MSAA 导致 Depth 获取失败</li>
+</ul>
+</li>
+<li>
+<p>API 适配</p>
+<ul>
+<li>Stencil、Depth UV 仍是 FlipV 的</li>
+</ul>
+</li>
+</ul>
+<h4 id="glsl_es2-tonemapping">GLSL_ES2 渲染 ToneMapping 时纹理反转回来了</h4>
+<div class="codehilite"><pre><span></span><span class="c1">// PostProcessToneMap.usf</span>
+
+<span class="cp">#define NEEDTOSWITCHVERTICLEAXIS (ES2_PROFILE &amp;&amp; COMPILER_GLSL_ES2) || (ES3_1_PROFILE &amp;&amp; COMPILER_GLSL_ES3_1)</span>
+</pre></div>
+
+
+<ul>
+<li>利用了以上宏进行判断</li>
+</ul>
+<h4 id="_8">目前已知的需要注意的问题</h4>
+<ul>
+<li>MSAA 导致 Depth Texture 无法获取</li>
+<li>ConditionResolveDepth 添加 Pass 强制写入 Depth</li>
+<li>Graphics API 坐标系导致采样不正确</li>
+<li>ToneMapping 前采样开销巨大（RGBA16）</li>
+<li>Motion 加在 Tonemapper 前，Depth 不正确，但是用 RenderDoc 采样后，又表现正常</li>
+</ul>
+<h4 id="msaa">解决方案 MSAA 无法得到深度</h4>
+<ul>
+<li>PostProcess 最开始插入一个pass 把color.a 写入一张纹理</li>
+<li>测试下 Decal、 开启 MSAA 是否真的有问题</li>
+</ul>
+<h4 id="glsl_es">GLSL_ES 兼容性</h4>
+<div class="codehilite"><pre><span></span>-
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kt">bool</span> <span class="n">FMobileSceneRenderer</span><span class="o">::</span><span class="n">RequiresTranslucencyPass</span><span class="p">(</span><span class="n">FRHICommandListImmediate</span><span class="o">&amp;</span> <span class="n">RHICmdList</span><span class="p">,</span> <span class="k">const</span> <span class="n">FViewInfo</span><span class="o">&amp;</span> <span class="n">View</span><span class="p">)</span> <span class="k">const</span>
+</pre></div>
+
+
+<ul>
+<li>直接使用 Color.a 则无问题</li>
+<li>
+<p>使用 Depth Texture 有额外开销</p>
+<ul>
+<li>MSAA 不会 Resolve Depth Texture</li>
+</ul>
+</li>
+<li>
+<p>UE4 着色器跨平台分析</p>
+<ul>
+<li><a href="https://de45xmedrsdbp.cloudfront.net/Resources/files/UE4_OpenGL4_GDC2014-514746542.pdf">Nvidia GDC 2014</a></li>
+<li>Frame Buffer 上下反过来渲染：UV 就能正确采样了</li>
+<li>问题在于，ToneMapping 正过来了... </li>
+<li>先参考下 SM5 中 Velocity 的计算<ul>
+<li>Velocity 计算一如既往 Last Clip Clip</li>
+<li>采样照常采样？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>直接计算 Vehicle 的速度向量</p>
+</li>
+<li>
+<p>OpenGL UV 增加方向与</p>
+</li>
+<li>
+<p>速度不正确</p>
+<ul>
+<li>坐标系转换参考了 visualize motion 后，凑对了</li>
+<li>OpenGL 投影矩阵与 D3D 一致，Shader 某处做了处理，查阅</li>
+</ul>
+</li>
+<li>
+<p>最终采样结果不正确，Velocity 横向采样？</p>
+</li>
+</ul>
+<h4 id="velocity-buffer">计算 Velocity Buffer</h4>
+<p>Velocity 渲染结果有缺失</p>
+<p>问题表现：</p>
+<ul>
+<li>RenderDoc 查看未通过 Depth Test<ul>
+<li>Clear 前有值的被Clear且通不过 Depth Test</li>
+<li>Clear 前无值的通过了Depth Test </li>
+<li>Render 位置错了，使用了上一帧的 Depth
+Flatten 失败：</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kt">bool</span> <span class="nf">SupportsVelocity</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">GPUSkinCachePreviousPositionBuffer</span><span class="p">.</span><span class="n">IsBound</span><span class="p">()</span> <span class="o">||</span>
+        <span class="n">PrevTransformBuffer</span><span class="p">.</span><span class="n">IsBound</span><span class="p">()</span> <span class="o">||</span> 
+        <span class="p">(</span><span class="n">PrevTransform0</span><span class="p">.</span><span class="n">IsBound</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">PrevTransform1</span><span class="p">.</span><span class="n">IsBound</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">PrevTransform2</span><span class="p">.</span><span class="n">IsBound</span><span class="p">())</span> <span class="o">||</span>
+        <span class="c1">//@todo MeshCommandPipeline - now that PreviousLocalToWorld is in the primitive uniform buffer, we can&#39;t look at whether the shader bound it to cull what gets rendered in velocity pass</span>
+        <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>上边代码最后一个返回 true</p>
+</li>
+<li>
+<p>继续查看</p>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="n">float4</span> <span class="n">PrevTranslatedWorldPosition</span> <span class="o">=</span> <span class="n">VertexFactoryGetPreviousWorldPosition</span><span class="p">(</span> <span class="n">Input</span><span class="p">,</span> <span class="n">VFIntermediates</span> <span class="p">);</span>   
+
+<span class="n">float4</span> <span class="nf">VertexFactoryGetPreviousWorldPosition</span><span class="p">(</span><span class="n">FVertexFactoryInput</span> <span class="n">Input</span><span class="p">,</span> <span class="n">FVertexFactoryIntermediates</span> <span class="n">Intermediates</span><span class="p">)</span>
+
+<span class="n">float3</span> <span class="n">SkinPreviousPosition</span><span class="p">(</span> <span class="n">FVertexFactoryInput</span> <span class="n">Input</span><span class="p">,</span> <span class="n">FVertexFactoryIntermediates</span> <span class="n">Intermediates</span> <span class="p">)</span>
+
+<span class="n">FBoneMatrix</span> <span class="n">CalcPreviousBoneMatrix</span><span class="p">(</span> <span class="n">FVertexFactoryInput</span> <span class="n">Input</span> <span class="p">)</span>
+
+<span class="n">FBoneMatrix</span> <span class="n">GetPreviousBoneMatrix</span><span class="p">(</span><span class="kt">int</span> <span class="n">Index</span><span class="p">)</span>
+
+<span class="n">OutEnvironment</span><span class="p">.</span><span class="n">SetDefine</span><span class="p">(</span><span class="n">TEXT</span><span class="p">(</span><span class="s">&quot;GPUSKIN_USE_BONES_SRV_BUFFER&quot;</span><span class="p">),</span> <span class="n">SupportsBonesBufferSRV</span><span class="p">(</span><span class="n">Platform</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+
+
+<p>修改几个地方后，能够渲染出速度
+需要排查具体那个因素导致的</p>
+<div class="codehilite"><pre><span></span>#define GPUSKIN_USE_BONES_SRV_BUFFER    1   // Use a Buffer&lt;float4&gt; if 1, otherwise a uniform buffer  
+</pre></div>
+
+
+<h4 id="14-motion-blur">14 Motion Blur</h4>
+<ul>
+<li>纯使用 Vc 时，样本权重都很小，导致采样结果很淡</li>
+<li>在速度非常大时会出现上述结果</li>
+<li>速度极大的时候，MaxTile 速度甚至不如实际 Center 的速度？</li>
+<li>解决了，Flatten 时候限制了最大速度，MotionBlurParameters.w</li>
+<li>Sample 时候路径很长，但采样路径很短</li>
+</ul>
+<h2 id="tips">导师 Tips</h2>
+<p>目标：UE4 ES2 如何使用 Depth Texture、Depth Texture 在哪设置</p>
+<ul>
+<li>
+<p>SunMask 自动查找 Shader 中的 Texture 使用情况并进行绑定</p>
+<ul>
+<li>SceneRenderTargetParameters.h line-132</li>
+<li>PostProcessMobile.usf SunMaskPS_ES2 </li>
+<li>
+<p>PostProcessMobile.cpp line-905 Bind</p>
+</li>
+<li>
+<p>SceneTextureCommon.ush line-35 CalcSceneDepth</p>
+<ul>
+<li>方法从 SceneTexturesStruct.SceneDepthTexture 采样</li>
+<li>SceneTexturesStruct 在 SceneRenderTarget</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>SunMask Pass 流程</p>
+<ul>
+<li>FRCPassPostProcessSunMaskES2::Process 中使用了 SetShader</li>
+<li>PostProcessMobile.cpp FRCPassPostProcessSunMaskES2::SetShader 根据参数创建 Shader</li>
+<li>Process 中根据 GetInputDesc(ePId_Input0) 来确认是否使用 DepthTexture/Color.a（usf 中采样 PostProcessInput0)</li>
+<li>ePId_Input0 在 Render 初始化 TRenderCompositexx 后 SetInput</li>
+<li>
+<p>SceneRenderTarget.cpp line-2362 MobileSceneColorBufferFormat 只有三种 FloatRGBA FloatR11G11B10 B8G8R8A8，若设备支持 HDR 默认为 PF_FloatRGBA</p>
+</li>
+<li>
+<p>PostProcessMobile.cpp line-1075 若 Input 材质为 FloatR11G11B10 格式，在着色器中使用 DepthTexture</p>
+</li>
+<li>PostProcessMobile.usf line-107 否则使用 Alpha 通道的深度表示</li>
+</ul>
+</li>
+<li>
+<p>追踪 SceneTexturesStruct 设置/使用情况</p>
+<ul>
+<li>SceneRenderTarget.cpp line-2875 出现相关宏 与FSceneTexturesUniformParameters关联</li>
+<li>SceneRenderTarget.cpp line-3029 出现相关宏 与FMobileSceneTexturesUniformParameters关联</li>
+<li>
+<p>SceneRenderTarget.cpp line-3092 参数绑定方法</p>
+</li>
+<li>
+<p>MobileShadingRenderer.cpp line-376 SceneDepth 局部变量</p>
+</li>
+<li>上述 SceneDepth 来源于 SceneRenderTarget.h/.cpp 中的 FSceneRenderTargets::SceneDepthZ</li>
+<li>而 SceneDepthZ 又会在 Pass 构造时候，Bind 到对应的 SceneTexture 上</li>
+</ul>
+</li>
+<li>
+<p>基础着色时，Depth 写入情况</p>
+<ul>
+<li>MobieBasePassPixelShader.usf Depth 写入 Color.a（HDR_LINIAR_64 开启情况下）</li>
+<li>MobileBasePass.cpp line-25 IsMobileHDR() 则设置 HDR_LINIAR_64</li>
+<li>控制台变量 r.MobileHDR 变量非常重要</li>
+</ul>
+</li>
+<li>
+<p>Pass 放在 ToneMapping 之后</p>
+<ul>
+<li>直接读取 Depth Texture</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">深度获取</h3>
+<ul>
+<li>SceneTexturesCommon.usf 中 CalcSceneDepth 函数调用 line-92 开始</li>
+</ul>
+<h2 id="_10">参考资料</h2>
+<p>https://www.itread01.com/content/1538656694.html</p>
+<p>https://tech.spaceapegames.com/2018/09/06/motion-blur-for-mobile-devices-in-unity/</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../tutor/" title="虚幻引擎入门" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                虚幻引擎入门
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../tile-based-rendering/" title="TBR" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                TBR
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 lijiankuan
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
